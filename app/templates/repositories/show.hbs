@@ -1,0 +1,22 @@
+{{#if editing}}
+  <div class="container">
+    {{md-input label="Title" value=model.title}}
+    {{md-input label="Clone url" value=model.location}}
+    {{md-input label="Icon url" value=model.icon}}
+    {{md-input label="Mdl icon url" value=model.mdlIcon}}
+    {{md-btn text="Update" action="save"}}
+  </div>
+  {{else}}
+  <div class="container">
+    <h3>{{model.title}}</h3>
+    <div class="row">
+      Located at {{model.location}}
+    </div>
+    <div class="row">
+      Icon is {{model.icon}} or {{model.mdlIcon}}
+    </div>
+    <div class="row">
+      {{md-btn text="edit" action="edit"}}
+    </div>
+  </div>
+{{/if}}

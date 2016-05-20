@@ -7,6 +7,8 @@ Router = Ember.Router.extend
 
 Router.map ->
   @route 'dashboard'
+  @route 'repositories', ->
+    @route 'show', path: ":repository_id"
 
 
 `export default Router`
