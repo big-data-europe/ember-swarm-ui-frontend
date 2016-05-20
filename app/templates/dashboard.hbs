@@ -1,13 +1,27 @@
 <div class="container">
-  <h1>Pipelines</h1>
-  {{#md-collection content=model.pipelines as |pipeline|}}
-    {{pipeline.title}}
+  {{#md-collection content=model.pipelines header="Pipelines" as |pipeline|}}
+    <div class="collection-item">
+      {{pipeline.title}}
+    </div>
   {{/md-collection}}
 
-  <h1>Repositories</h1>
-  {{#md-collection content=model.repositories as |repository|}}
-    {{repository.title}}
-  {{/md-collection}}
+  <h3>Repositories</h3>
+  {{#md-card-collapsible}}
+    {{#each model.repositories as |repository|}}
+      {{#md-collapsible icon=repository.mdlIcon title=repository.title}}
+        Stored at {{repository.location}}.
+      {{/md-collapsible}}
+    {{/each}}
+    {{#md-collapsible icon="add" title="Create new repository"}}
+      <div class="container">
+        {{md-input label="Title" value=repositoryTitle}}
+        {{md-input label="Clone url" value=repositoryLocation}}
+        {{md-input label="Icon url" value=repositoryIcon}}
+        {{md-input label="Mdl icon url" value=repositoryMdlIcon}}
+        {{md-btn text="Create" action="create"}}
+      </div>
+    {{/md-collapsible}}
+  {{/md-card-collapsible}}
 </div>
 
 {{outlet}}
