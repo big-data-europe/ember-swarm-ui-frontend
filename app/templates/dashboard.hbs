@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Pipelines</h1>
+  {{#md-collection content=model.pipelines as |pipeline|}}
+    {{pipeline.title}}
+  {{/md-collection}}
+
+  <h1>Repositories</h1>
+  {{#md-collection content=model.repositories as |repository|}}
+    {{repository.title}}
+  {{/md-collection}}
+</div>
+
+{{outlet}}
