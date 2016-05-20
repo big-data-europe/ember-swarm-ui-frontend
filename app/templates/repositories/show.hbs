@@ -2,8 +2,7 @@
   <div class="container">
     {{md-input label="Title" value=model.title}}
     {{md-input label="Clone url" value=model.location}}
-    {{md-input label="Icon url" value=model.icon}}
-    {{md-input label="Mdl icon url" value=model.mdlIcon}}
+    {{smart-icon model=model editing=true}}
     {{md-btn text="Update" action="save"}}
   </div>
   {{else}}
@@ -13,7 +12,7 @@
       Located at {{model.location}}
     </div>
     <div class="row">
-      Icon is {{model.icon}} or {{model.mdlIcon}}
+      Icon: {{smart-icon model=model}}
     </div>
     <div class="row">
       {{md-btn text="edit" action="edit"}}

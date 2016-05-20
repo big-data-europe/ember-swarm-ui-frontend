@@ -8,12 +8,15 @@
   <h3>Repositories</h3>
   {{#md-card-collapsible}}
     {{#each model.repositories as |repository|}}
-      {{#md-collapsible icon=repository.mdlIcon title=repository.title}}
+      {{#md-collapsible icon=repository title=repository.title}}
         <div class="row">
           Stored at {{repository.location}}.
         </div>
         <div class="row">
-          {{link-to 'Manage' 'repositories.show' repository}}
+          Has {{repository.pipelineInstances.length}} connected pipelines.
+        </div>
+        <div class="row">
+          {{link-to 'Manage' 'repositories.show' repository classNames="btn"}}
         </div>
       {{/md-collapsible}}
     {{/each}}
@@ -21,8 +24,7 @@
       <div class="container">
         {{md-input label="Title" value=repositoryTitle}}
         {{md-input label="Clone url" value=repositoryLocation}}
-        {{md-input label="Icon url" value=repositoryIcon}}
-        {{md-input label="Mdl icon url" value=repositoryMdlIcon}}
+        {{smart-icon editing=true model=repositoryIcon}}
         {{md-btn text="Create" action="create"}}
       </div>
     {{/md-collapsible}}
