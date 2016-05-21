@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>Manage pipeline</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    {{smart-icon icon=model}} {{model.title}}
+  </div>
+  <div class="row">
+    Based on {{model.repository.title}}
+  </div>
+  <div class="row">
+    Operations:
+    {{md-btn text="up" action="swarmUp"}}
+    {{md-btn text="stop" action="swarmDown"}}
+    {{md-btn text="down" action="swarmDown"}}
+    {{md-btn text="scale" action="swarmScale"}}
+    {{md-btn text="logs" action="swarmLogs"}}
+  </div>
+
+</div>

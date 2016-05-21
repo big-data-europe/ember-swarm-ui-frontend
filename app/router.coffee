@@ -9,6 +9,8 @@ Router.map ->
   @route 'dashboard'
   @route 'repositories', ->
     @route 'show', path: ":repository_id"
+  @route 'pipelines', ->
+    @route 'show', path: ":pipeline_id"
 
 
 `export default Router`
