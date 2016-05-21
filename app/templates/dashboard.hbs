@@ -13,6 +13,7 @@
         </div>
         <div class="row">
           {{link-to 'Manage' 'repositories.show' repository classNames="btn"}}
+          <div class="btn" {{action "launchPipeline" repository}}>Launch</div>
         </div>
       {{/md-collapsible}}
     {{/each}}
