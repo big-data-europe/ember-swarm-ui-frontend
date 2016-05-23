@@ -1,22 +1,31 @@
 `import Model from 'ember-data/model'`
 `import attr from 'ember-data/attr';`
 `import DS from 'ember-data'`
-`import HasSerialActions from '../mixins/has-serial-actions'`
 
-Service = Model.extend HasSerialActions,
+Service = Model.extend
   name: attr('string')
   scaling: attr('number')
   pipeline: DS.belongsTo('pipeline-instance')
+  targetScaling: Ember.computed.oneWay 'scaling'
+  executingScaling: false
+  changingScaling: Ember.computed 'scaling', 'targetScaling', 'executingScaling', ->
+    (@get('scaling') != @get('targetScaling')) or @get('executingScaling')
+  executeScaling: () ->
+    return if @get('targetScaling') == @get('scaling')
+    @set 'executingScaling', true
+    Ember.$.ajax( "/swarm/services/#{@get('id')}/scale",
+      method: "POST"
+      data: num: @get('targetScaling')
+    ).then () =>
+      @reload().then =>
+        @rollbackAttributes()
+        @set 'executingScaling', false
+        unless @get('scaling') == @get('targetScaling')
+          @performScaling( @get 'targetScaling' )
   performScaling: (scaling) ->
-    @pushAction () =>
-      new Ember.RSVP.Promise (success) =>
-        Ember.$.ajax( "/swarm/services/#{@get('id')}/scale",
-          method: "POST"
-          data: num: @get('scaling')
-        ).then () =>
-          @reload().then =>
-            @rollbackAttributes()
-            success()
+    @set 'targetScaling', scaling
+    return if @get('executingScaling') # already running
+    Ember.run.debounce this, @executeScaling, 1500
 
 
 `export default Service`

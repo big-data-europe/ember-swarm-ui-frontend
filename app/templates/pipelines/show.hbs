@@ -23,16 +23,11 @@
       <div class="col s3">
         {{service.name}}
       </div>
-      <div class="col s2 line-input">
-        {{md-input type="number" value=service.scaling}}
-      </div>
-      <div class="col s2">
-        {{#if service.hasDirtyAttributes}}
-          <div class="btn" {{action "serviceScale" service}}>
-            Scale it!
-          </div>
-        {{/if}}
-        {{#if service.actionCount}}({{service.actionCount}} changes executing){{/if}}
+      <div class="col s9 line-input">
+        <div class="btn secondary" {{action "decreaseServiceScaling" service}}> - </div>
+        {{service.targetScaling}}
+        <div class="btn secondary" {{action "increaseServiceScaling" service}}> + </div>
+        {{#if service.changingScaling}}(updating){{/if}}
       </div>
     </div>
   {{/each}}
