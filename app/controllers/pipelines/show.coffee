@@ -13,14 +13,8 @@ PipelinesShowController = Ember.Controller.extend
     swarmDown: ->
       @pipelineOp "down", => alert("Brought down #{@get('model.title')}")
     serviceScale: (service) ->
-      Ember.$.ajax( "/swarm/services/#{service.get('id')}/scale",
-        method: "POST"
-        data: num: service.get('scaling')
-      ).then( () ->
+      service.performScaling().then =>
         alert("scaled #{service.get('name')}")
-        service.reload().then ->
-          service.rollbackAttributes()
-      )
 
 
 `export default PipelinesShowController`
