@@ -2,9 +2,13 @@
 
 PipelinesShowController = Ember.Controller.extend
   pipelineOp: (operation, callback) ->
-    Ember.$.ajax( "/swarm/pipelines/#{@get('model.id')}/#{operation}"
-      method: "POST"
-    ).then -> Ember.run.next callback
+    @get('model').pushAction =>
+      new Ember.RSVP.Promise (success) =>
+        Ember.$.ajax( "/swarm/pipelines/#{@get('model.id')}/#{operation}"
+          method: "POST"
+        ).then ->
+          success()
+          callback?()
   actions:
     swarmUp: ->
       @pipelineOp "up", => alert("#{@get('model.title')} started up")

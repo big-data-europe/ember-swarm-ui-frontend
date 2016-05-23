@@ -9,6 +9,11 @@
     {{md-btn text="stop" action="swarmStop"}}
     {{md-btn text="down" action="swarmDown"}}
   </div>
+  {{#if model.actionCount}}
+    <div class="row">
+      {{model.actionCount}} actions pending...
+    </div>
+  {{/if}}
 </div>
 
 <div class="container">
