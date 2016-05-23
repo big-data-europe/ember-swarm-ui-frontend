@@ -7,6 +7,6 @@ PipelineInstance = Model.extend
   icon: attr('string')
   mdlIcon: attr('string')
   repository: DS.belongsTo('repository')
-
+  services: DS.hasMany('service')
 
 `export default PipelineInstance`
