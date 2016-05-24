@@ -4,6 +4,10 @@
 
 <div class="container">
   <div class="row">
+    This pipeline is {{model.status.title}}.
+  </div>
+
+  <div class="row">
     Operations:
     {{md-btn text="up" action="swarmUp"}}
     {{md-btn text="stop" action="swarmStop"}}
@@ -32,7 +36,7 @@
       <div class="col s3 line-input">
         {{#if service.restarting}}
           Restarting...
-        {{else}}
+          {{else}}
           <div class="btn secondary" {{action "restartService" service}}>restart</div>
         {{/if}}
       </div>
