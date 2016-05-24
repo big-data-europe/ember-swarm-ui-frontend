@@ -20,6 +20,8 @@ PipelinesShowController = Ember.Controller.extend
       service.performScaling( service.get('targetScaling') - 1 )
     increaseServiceScaling: (service) ->
       service.performScaling( service.get('targetScaling') + 1 )
+    restartService: (service) ->
+      service.restart()
 
 
 `export default PipelinesShowController`

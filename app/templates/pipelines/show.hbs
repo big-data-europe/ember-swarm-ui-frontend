@@ -23,11 +23,18 @@
       <div class="col s3">
         {{service.name}}
       </div>
-      <div class="col s9 line-input">
+      <div class="col s6 line-input">
         <div class="btn secondary" {{action "decreaseServiceScaling" service}}> - </div>
         {{service.targetScaling}}
         <div class="btn secondary" {{action "increaseServiceScaling" service}}> + </div>
         {{#if service.changingScaling}}(updating){{/if}}
+      </div>
+      <div class="col s3 line-input">
+        {{#if service.restarting}}
+          Restarting...
+        {{else}}
+          <div class="btn secondary" {{action "restartService" service}}>restart</div>
+        {{/if}}
       </div>
     </div>
   {{/each}}

@@ -26,6 +26,13 @@ Service = Model.extend
     @set 'targetScaling', scaling
     return if @get('executingScaling') # already running
     Ember.run.debounce this, @executeScaling, 1500
+  restart: ->
+    unless @get('restarting')
+      @set 'restarting', true
+      Ember.$.ajax( "/swarm/services/#{@get('id')}/restart",
+        method: "POST"
+      ).then () =>
+        @set 'restarting', false
 
 
 `export default Service`
