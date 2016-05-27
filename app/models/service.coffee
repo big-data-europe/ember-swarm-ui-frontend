@@ -33,6 +33,12 @@ Service = Model.extend
         method: "POST"
       ).then () =>
         @set 'restarting', false
+  refreshLogs: ->
+    unless @get('refreshingLogs')
+      @set 'refreshingLogs', true
+      Ember.$.ajax( "/swarm/services/#{@get('id')}/logs" ).then (content) =>
+        @set 'logs', content
+        @set 'refreshingLogs', false
 
 
 `export default Service`

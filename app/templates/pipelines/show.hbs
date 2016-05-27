@@ -39,7 +39,18 @@
           {{else}}
           <div class="btn secondary" {{action "restartService" service}}>restart</div>
         {{/if}}
+        <div class="btn secondary" {{action "toggleLogs" service}}><i class="material-icons">bug_report</i></div>
       </div>
     </div>
+    {{#if service.showLogs}}
+      <div class="log-container">
+        <div class="btn" {{action "refreshLogs" service}}>
+          {{#if service.refreshingLogs}}...{{else}}<i class="material-icons">refresh</i>{{/if}}
+        </div>
+        <div class="logs">
+          {{service.logs}}
+        </div>
+      </div>
+    {{/if}}
   {{/each}}
 </div>

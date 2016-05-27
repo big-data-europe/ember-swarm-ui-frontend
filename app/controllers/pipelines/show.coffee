@@ -11,17 +11,23 @@ PipelinesShowController = Ember.Controller.extend
           callback?()
   actions:
     swarmUp: ->
-      @pipelineOp "up", => alert("#{@get('model.title')} started up")
+      @pipelineOp "up"
     swarmStop: ->
-      @pipelineOp "stop", => alert("#{@get('model.title')} stopped")
+      @pipelineOp "stop"
     swarmDown: ->
-      @pipelineOp "down", => alert("Brought down #{@get('model.title')}")
+      @pipelineOp "down"
     decreaseServiceScaling: (service) ->
       service.performScaling( service.get('targetScaling') - 1 )
     increaseServiceScaling: (service) ->
       service.performScaling( service.get('targetScaling') + 1 )
     restartService: (service) ->
       service.restart()
+    toggleLogs: (service) ->
+      service.toggleProperty "showLogs"
+      service.refreshLogs() if service.showLogs
+      return
+    refreshLogs: (service) ->
+      service.refreshLogs()
 
 
 `export default PipelinesShowController`
