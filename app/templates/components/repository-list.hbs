@@ -2,7 +2,7 @@
   {{#each repositories as |repository|}}
     {{#md-collapsible icon=repository title=repository.title}}
       <div class="row">
-        Stored at {{repository.location}}.
+        Stored at <a href= {{repository.location}} target="_blank">{{repository.location}}</a>.
       </div>
       <div class="row">
         Has {{repository.pipelineInstances.length}} connected pipelines.
