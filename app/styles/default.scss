@@ -36,6 +36,18 @@ textarea.materialize-textarea:focus.valid {
   box-shadow: none;
 }
 
+.materialize-tabs {
+  .tabs {
+    li {
+      cursor: pointer;
+
+      a:hover {
+        color: $secondary-color;
+      }
+    }
+  }
+}
+
 .line-input .input-field {
   margin-top: -11px;
 }
