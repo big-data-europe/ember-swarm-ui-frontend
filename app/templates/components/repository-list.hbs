@@ -1,0 +1,24 @@
+{{#md-card-collapsible}}
+  {{#each repositories as |repository|}}
+    {{#md-collapsible icon=repository title=repository.title}}
+      <div class="row">
+        Stored at {{repository.location}}.
+      </div>
+      <div class="row">
+        Has {{repository.pipelineInstances.length}} connected pipelines.
+      </div>
+      <div class="row">
+        {{link-to 'Manage' 'repositories.show' repository classNames="btn"}}
+        <div class="btn" {{action "launchPipeline" repository}}>Launch</div>
+      </div>
+    {{/md-collapsible}}
+  {{/each}}
+  {{#md-collapsible icon="add" title="Create new repository"}}
+    <div class="container">
+      {{md-input label="Title" value=repositoryTitle}}
+      {{md-input label="Clone url" value=repositoryLocation}}
+      {{smart-icon editing=true model=repositoryIcon}}
+      {{md-btn text="Create" action="create"}}
+    </div>
+  {{/md-collapsible}}
+{{/md-card-collapsible}}

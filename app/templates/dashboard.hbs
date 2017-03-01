@@ -1,11 +1,22 @@
-<div class="container">
-  <h1>Dashboard</h1>
+<div class="dashboard">
+
+
+  <div class="container">
+    <h1>Dashboard</h1>
+  </div>
+
+  <div class="container">
+    {{#md-tabs selected=basicTabsSelection}}
+      {{md-tab value='info' title="Info"}} {{md-tab value='repositories' title="Repositories"}} {{md-tab value='pipelines' title="Pipelines"}}
+    {{/md-tabs}}
+
+    {{#if (eq basicTabsSelection 'info')}}
+      {{#md-card-panel}}
+        <div class="text">Create and manage a repository in the <span>repositories</span> section.</div>
+        <div class="text">Create and manage a pipeline in the <span>pipelines</span> section.</div>
+      {{/md-card-panel}}
+      {{else if (eq basicTabsSelection 'repositories')}} {{repository-list repositories=model.repositories launchPipeline=(action 'launchPipeline')}} {{else if (eq basicTabsSelection 'pipelines')}} {{pipeline-list pipelines=model.pipelines}}
+    {{/if}}
+  </div>
+  {{outlet}}
 </div>
-
-<div class="container">
-  {{repository-list repositories=model.repositories launchPipeline=(action 'launchPipeline')}}
-
-  {{pipeline-list pipelines=model.pipelines}}
-</div>
-
-{{outlet}}

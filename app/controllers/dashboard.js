@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   store: Ember.inject.service('store'),
   repositoryIcon: Ember.Object.create(),
+  basicTabsSelection: "info",
   actions: {
     create: function() {
       var repository;
