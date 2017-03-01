@@ -9,3 +9,4 @@ $secondary-color: color("pink", "accent-4");
 @import 'ember-cli-materialize';
 // import default style and styles for pages
 @import 'app/styles/default.scss';
+@import 'app/styles/dashboard.scss';

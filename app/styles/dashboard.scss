@@ -1,0 +1,13 @@
+.dashboard {
+  .container {
+    .text {
+      span {
+        font-weight: 600;
+
+        &.clickable {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
