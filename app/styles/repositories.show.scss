@@ -1,0 +1,21 @@
+.repositories--show {
+  .container {
+    .row {
+      padding-left: 2%;
+    }
+
+    .input-field {
+      width: 90%;
+    }
+
+    .icon-editor {
+      display: inline-block;
+      width: 90%;
+
+      .input-field {
+        width: 100%;
+        margin-right: 1%;
+      }
+    }
+  }
+}

@@ -1,25 +1,28 @@
-<div class="container">
-  <h1>Manage repository</h1>
-</div>
+<div class="repositories--show">
+  <div class="container">
+    <h1>Manage repository</h1>
+  </div>
 
-{{#if editing}}
-  <div class="container">
-    {{md-input label="Title" value=model.title}}
-    {{md-input label="Clone url" value=model.location}}
-    {{smart-icon model=model editing=true}}
-    {{md-btn text="Update" action="save"}}
-  </div>
+  {{#if editing}}
+    <div class="container">
+      {{md-input label="Name of repository" value=model.title}}
+      {{md-input label="Git web URL for a repository with a docker-compose.yml file" value=model.location}}
+      {{smart-icon model=model editing=true}}
+      {{md-btn text="Update" action="save"}}
+      {{md-btn text="Cancel" action="edit"}}
+    </div>
   {{else}}
-  <div class="container">
-    <h3>{{model.title}}</h3>
-    <div class="row">
-      Located at <a href= {{model.location}} target="_blank">{{model.location}}</a>.
+    <div class="container">
+      <h3>{{model.title}}</h3>
+      <div class="row">
+        Located at <a href= {{model.location}} target="_blank">{{model.location}}</a>.
+      </div>
+      <div class="row icon">
+        Icon: {{smart-icon model=model}}
+      </div>
+      <div class="row">
+        {{md-btn text="edit" action="edit"}}
+      </div>
     </div>
-    <div class="row">
-      Icon: {{smart-icon model=model}}
-    </div>
-    <div class="row">
-      {{md-btn text="edit" action="edit"}}
-    </div>
-  </div>
-{{/if}}
+  {{/if}}
+</div>

@@ -10,7 +10,6 @@ export default Ember.Component.extend({
         location: this.get('repositoryLocation'),
         title: this.get('repositoryTitle'),
         icon: this.get('repositoryIcon.icon'),
-        mdlIcon: this.get('repositoryIcon.mdlIcon')
       });
       repository.save().then((function(_this) {
         return function() {
@@ -19,6 +18,12 @@ export default Ember.Component.extend({
           return _this.set('repositoryIcon', Ember.Object.create());
         };
       })(this));
+    },
+    clear: function() {
+      this.set('repositoryLocation', "");
+      this.set('repositoryTitle', "");
+      this.set('repositoryIcon.icon', "");
+      return false;
     },
     launchPipeline: function(repository) {
       var target;
