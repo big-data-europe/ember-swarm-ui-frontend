@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  showDialog: false,
   pipelineOp: function(operation, callback) {
     return this.get('model').pushAction((function(_this) {
       return function() {
@@ -24,6 +25,12 @@ export default Ember.Controller.extend({
     },
     swarmDown: function() {
       return this.pipelineOp("down");
+    },
+    confirmDeletion: function() {
+      this.set("showDialog", true);
+    },
+    closeDialog: function() {
+      this.set("showDialog", false);
     },
     delete: function() {
       this.get('model').deleteRecord();

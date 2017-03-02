@@ -28,6 +28,27 @@
 
         .service {
           margin: 0 5%;
+
+          .log-container {
+            position: relative;
+
+            .btn {
+              right: 20px;
+              position: absolute;
+            }
+
+            .logs {
+              white-space: pre-line;
+              padding: 15px;
+              border: solid 2px #555;
+              border-radius: 5px;
+              background-color: #222;
+              color: #AAA;
+              overflow: scroll;
+              min-height: 3em;
+              max-height: 22em;
+            }
+          }
         }
       }
 

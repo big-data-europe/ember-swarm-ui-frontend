@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  showDialog: false,
   title: Ember.computed(function() {
     return this.get('model.title');
   }),
@@ -18,6 +19,12 @@ export default Ember.Controller.extend({
     cancel: function() {
       this.get('model').rollbackAttributes();
       this.toggleProperty("editing");
+    },
+    confirmDeletion: function() {
+      this.set("showDialog", true);
+    },
+    closeDialog: function() {
+      this.set("showDialog", false);
     },
     delete: function() {
       this.get('model').deleteRecord();

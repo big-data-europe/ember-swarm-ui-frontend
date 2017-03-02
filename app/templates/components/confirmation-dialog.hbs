@@ -1,0 +1,9 @@
+{{#md-modal close='closeDialog' class="" }}
+  <div class="modal-content">
+    {{text}}
+  </div>
+  <div class="modal-footer">
+    <a class="btn secondary" {{action 'closeDialog'}}> Cancel</a>
+    <a class="btn delete" {{action 'agree'}}>{{buttonText}}</a>
+  </div>
+{{/md-modal}}

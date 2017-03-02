@@ -20,7 +20,7 @@
           {{md-btn text="stop" action="swarmStop"}}
           {{md-btn text="down" action="swarmDown"}}
           <div class="delete">
-            <div class="btn delete" {{action "delete"}} title='delete forever'>
+            <div class="btn delete" {{action "confirmDeletion"}} title='delete forever'>
               <i class="material-icons">delete_forever</i></div>
           </div>
         </div>
@@ -40,3 +40,7 @@
     {{/md-card-panel}}
   </div>
 </div>
+
+{{#if showDialog}}
+  {{confirmation-dialog buttonText='Delete' text="Delete this pipeline?" closeDialog=(action 'closeDialog') action='delete' delete=(action 'delete')}}
+{{/if}}
