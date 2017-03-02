@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  title: Ember.computed(function() {
+    return this.get('model.title');
+  }),
   actions: {
     save: function() {
       this.get('model').save().then((function(_this) {
@@ -10,6 +13,10 @@ export default Ember.Controller.extend({
       })(this));
     },
     edit: function() {
+      this.toggleProperty("editing");
+    },
+    cancel: function() {
+      this.get('model').rollbackAttributes();
       this.toggleProperty("editing");
     },
     delete: function() {
