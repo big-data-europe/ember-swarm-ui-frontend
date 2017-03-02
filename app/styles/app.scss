@@ -7,8 +7,10 @@ $secondary-color: color("pink", "accent-4");
 @import 'components/variables'; // Materialize styles
 @import "materialize"; // ember-cli-materialize styles
 @import 'ember-cli-materialize';
+
 // import default style and styles for pages
 @import 'app/styles/default.scss';
-@import 'app/styles/dashboard.scss';
-@import 'app/styles/repositories.show.scss';
+@import 'app/styles/pipelines.scss';
+@import 'app/styles/index.scss';
+@import 'app/styles/repositories.scss';
 @import 'app/styles/smart-icon.scss';

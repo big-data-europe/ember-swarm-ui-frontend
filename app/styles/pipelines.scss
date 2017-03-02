@@ -1,0 +1,32 @@
+.pipelines {
+  .container {
+    h1 {
+      text-align: center;
+    }
+
+    .text {
+      span {
+        font-weight: 600;
+
+        &.clickable {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .pipelines--show {
+    .container {
+      h3 {
+        text-align: center;
+      }
+      h4 {
+        text-align: center;
+      }
+
+      &.actions {
+        text-align: center;
+      }
+    }
+  }
+}

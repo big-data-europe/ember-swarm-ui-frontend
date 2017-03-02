@@ -1,6 +1,6 @@
 <div class="repository--list">
   {{#md-card-collapsible}}
-    {{#each repositories as |repository|}}
+    {{#each model as |repository|}}
       {{#md-collapsible icon=repository title=repository.title}}
         <div class="row">
           Stored at <a href= {{repository.location}} target="_blank">{{repository.location}}</a>.
