@@ -32,7 +32,16 @@
       }
 
       &.actions {
-        text-align: center;
+        .row {
+          &.status {
+            text-align: center;
+          }
+        }
+
+        .delete {
+          display: inline-block;
+          float: right;
+        }
       }
     }
   }

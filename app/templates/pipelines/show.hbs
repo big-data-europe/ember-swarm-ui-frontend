@@ -6,7 +6,7 @@
       </div>
 
       <div class="container actions">
-        <div class="row">
+        <div class="row status">
           This pipeline is currently {{model.status.title}}.
           {{#if model.requestedStatus}}
             {{#if (not-eq model.status.title model.requestedStatus.title)}}
@@ -16,7 +16,13 @@
         </div>
 
         <div class="row">
-          Operations: {{md-btn text="up" action="swarmUp"}} {{md-btn text="stop" action="swarmStop"}} {{md-btn text="down" action="swarmDown"}}
+          {{md-btn text="up" action="swarmUp"}}
+          {{md-btn text="stop" action="swarmStop"}}
+          {{md-btn text="down" action="swarmDown"}}
+          <div class="delete">
+            <div class="btn delete" {{action "delete"}} title='delete forever'>
+              <i class="material-icons">delete_forever</i></div>
+          </div>
         </div>
         {{#if model.actionCount}}
           <div class="row">

@@ -59,6 +59,9 @@ textarea.materialize-textarea:focus.valid {
 .btn.secondary {
   background-color: $primary-color;
 }
+.btn.delete {
+  background-color: red;
+}
 
 .log-container {
   position: relative;

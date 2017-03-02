@@ -24,6 +24,12 @@ export default Ember.Controller.extend({
     },
     swarmDown: function() {
       return this.pipelineOp("down");
+    },
+    delete: function() {
+      this.get('model').deleteRecord();
+      this.get('model').save();
+      // TODO: popup to approve??
+      this.transitionToRoute('pipelines');
     }
   }
 });
