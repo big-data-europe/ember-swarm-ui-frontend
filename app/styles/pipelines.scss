@@ -20,8 +20,15 @@
       h3 {
         text-align: center;
       }
-      h4 {
-        text-align: center;
+
+      .services {
+        h4 {
+          text-align: center;
+        }
+
+        .service {
+          margin: 0 5%;
+        }
       }
 
       &.actions {

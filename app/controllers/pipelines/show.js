@@ -24,24 +24,6 @@ export default Ember.Controller.extend({
     },
     swarmDown: function() {
       return this.pipelineOp("down");
-    },
-    decreaseServiceScaling: function(service) {
-      return service.performScaling(service.get('targetScaling') - 1);
-    },
-    increaseServiceScaling: function(service) {
-      return service.performScaling(service.get('targetScaling') + 1);
-    },
-    restartService: function(service) {
-      return service.restart();
-    },
-    toggleLogs: function(service) {
-      service.toggleProperty("showLogs");
-      if (service.showLogs) {
-        service.refreshLogs();
-      }
-    },
-    refreshLogs: function(service) {
-      return service.refreshLogs();
     }
   }
 });
