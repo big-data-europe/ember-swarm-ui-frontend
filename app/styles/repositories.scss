@@ -38,6 +38,12 @@
       }
 
       .container {
+        .delete {
+          display: inline-block;
+          float: right;
+          margin-right: 10%;
+        }
+
         .row {
           padding-left: 2%;
         }
