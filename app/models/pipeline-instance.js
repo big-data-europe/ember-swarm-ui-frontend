@@ -10,9 +10,7 @@ export default DS.Model.extend(HasSerialActions, {
   status: DS.belongsTo('status', {
     async: true
   }),
-  requestedStatus: DS.belongsTo('status', {
-    async: true
-  }),
+  requestedStatus: DS.belongsTo('status'),
   repository: DS.belongsTo('repository'),
   services: DS.hasMany('service'),
   pushAction: function() {
