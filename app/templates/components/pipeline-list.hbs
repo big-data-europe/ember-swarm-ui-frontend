@@ -1,22 +1,40 @@
 {{#if model}}
-  {{#md-card-collapsible}}
-    {{#each model as |pipeline|}}
-      {{#md-collapsible icon=pipeline title=pipeline.title}}
-        <div class="row">
-          This pipeline is currently {{pipeline.status.title}}.
-          {{#if pipeline.requestedStatus}}
-            {{#if (not-eq pipeline.status.title pipeline.requestedStatus.title)}}
-              The requested status is {{pipeline.requestedStatus.title}}.
-            {{/if}}
-          {{/if}}
-        </div>
-        <div class="row">
-          {{link-to 'Manage' 'pipelines.show' pipeline classNames="btn"}}
-        </div>
-      {{/md-collapsible}}
+  <div class="pipeline--list">
 
-    {{/each}}
-  {{/md-card-collapsible}}
+
+    {{#md-card-collapsible}}
+      {{#each model as |pipeline|}}
+        {{#md-collapsible icon=pipeline title=pipeline.title}}
+          <div class="row">
+            Current status: {{pipeline.status.title}}
+            {{#if pipeline.requestedStatus}}
+              {{#if (not-eq pipeline.status.title pipeline.requestedStatus.title)}}
+                Requested status: {{pipeline.requestedStatus.title}}.
+              {{/if}}
+            {{/if}}
+          </div>
+          <div class="row">
+            Services:
+            <ul class="service-list">
+              {{#each pipeline.services as |service|}}
+                <li>{{service.name}}: {{service.scaling}}
+                  {{#if (gt service.scaling 1)}}
+                    instances
+                  {{else}}
+                    instance
+                  {{/if}}
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+          <div class="row">
+            {{link-to 'Manage' 'pipelines.show' pipeline classNames="btn"}}
+          </div>
+        {{/md-collapsible}}
+
+      {{/each}}
+    {{/md-card-collapsible}}
+  </div>
 {{else}}
   {{#md-card-panel}}
     There are no pipelines yet. Launch one in the

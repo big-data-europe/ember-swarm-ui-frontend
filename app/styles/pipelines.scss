@@ -13,6 +13,17 @@
         }
       }
     }
+
+    .pipeline--list {
+      .service-list {
+        margin-left: 5%;
+
+        li {
+          list-style-type: circle;
+          margin-top: 1%;
+        }
+      }
+    }
   }
 
   .pipelines--show {
