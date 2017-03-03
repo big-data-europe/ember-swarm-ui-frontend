@@ -7,11 +7,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('pipelines', function() {
-    this.route('show', {
-      path: ':pipeline_id'
-    });
-  });
+  this.route('pipelines', function() {});
   this.route('repositories', function() {
     this.route('show', {
       path: ':repository_id'
