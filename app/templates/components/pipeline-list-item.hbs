@@ -1,0 +1,24 @@
+<div class="row">
+  Current status: {{pipeline.status.title}}
+</div>
+{{#if pipeline.requestedStatus}}
+  <div class="row">
+    {{#if (not-eq pipeline.status.title pipeline.requestedStatus.title)}}
+      Requested status: {{pipeline.requestedStatus.title}}
+    {{/if}}
+  </div>
+{{/if}}
+<div class="row">
+  Services:
+  <ul class="service-list">
+    {{#each pipeline.services as |service|}}
+      <li>{{service.name}}: {{service.scaling}}
+        {{#if (gt service.scaling 1)}}
+          instances
+        {{else}}
+          instance
+        {{/if}}
+      </li>
+    {{/each}}
+  </ul>
+</div>

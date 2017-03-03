@@ -48,7 +48,7 @@ textarea.materialize-textarea:focus.valid {
 
 .btn {
   &.delete {
-    background-color: red;
+    background-color: $secondary-color;
   }
 
   &.secondary {

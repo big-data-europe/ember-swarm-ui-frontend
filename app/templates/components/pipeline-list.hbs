@@ -5,33 +5,14 @@
     {{#md-card-collapsible}}
       {{#each model as |pipeline|}}
         {{#md-collapsible icon=pipeline title=pipeline.title}}
-          <div class="row">
-            Current status: {{pipeline.status.title}}
-          </div>
-          {{#if pipeline.requestedStatus}}
-            <div class="row">
-              {{#if (not-eq pipeline.status.title pipeline.requestedStatus.title)}}
-                Requested status: {{pipeline.requestedStatus.title}}
-              {{/if}}
-            </div>
+          {{#if editable}}
+            {{pipeline-manager model=pipeline}}
+          {{else}}
+            {{pipeline-list-item pipeline=pipeline}}
           {{/if}}
-          <div class="row">
-            Services:
-            <ul class="service-list">
-              {{#each pipeline.services as |service|}}
-                <li>{{service.name}}: {{service.scaling}}
-                  {{#if (gt service.scaling 1)}}
-                    instances
-                  {{else}}
-                    instance
-                  {{/if}}
-                </li>
-              {{/each}}
-            </ul>
-          </div>
-          <div class="row">
-            {{link-to 'Manage' 'pipelines.show' pipeline classNames="btn"}}
-          </div>
+          {{!-- <div class="row">
+            <button type="button" class='btn' name="button" {{action 'manage'}}> {{manageButtonText}}</button>
+          </div> --}}
         {{/md-collapsible}}
 
       {{/each}}

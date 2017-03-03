@@ -27,16 +27,7 @@
   }
 
   .pipelines--show {
-    .container {
-      h3 {
-        text-align: center;
-      }
-
       .services {
-        h4 {
-          text-align: center;
-        }
-
         .service {
           margin: 0 5%;
 
@@ -45,7 +36,7 @@
             margin: 3% 5% 5% 5%;
 
             .btn {
-              top: 3%;
+              top: 10%;
               right: 25px;
               position: absolute;
             }
@@ -65,18 +56,14 @@
         }
       }
 
-      &.actions {
-        .row {
-          &.status {
-            text-align: center;
-          }
-        }
-
-        .delete {
-          display: inline-block;
-          float: right;
-        }
+      .actions {
+        display: inline-block;
+        margin-left: -1%;
       }
-    }
+
+      .delete {
+        display: inline-block;
+        float: right;
+      }
   }
 }

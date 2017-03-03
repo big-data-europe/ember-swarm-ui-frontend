@@ -1,0 +1,35 @@
+<div class="pipelines--show">
+  <div class="row status">
+    Current status: {{model.status.title}}
+  </div>
+  {{#if model.requestedStatus}}
+    <div class="row status">
+      {{#if (not-eq model.status.title model.requestedStatus.title)}}
+        Requested status: {{model.requestedStatus.title}}
+      {{/if}}
+    </div>
+  {{/if}}
+
+  <div class="actions">
+    {{md-btn text="up" action="swarmUp"}} {{md-btn text="stop" action="swarmStop"}} {{md-btn text="down" action="swarmDown"}}
+    {{#if model.actionCount}}
+      {{model.actionCount}} actions pending...
+    {{/if}}
+  </div>
+  <div class="delete">
+    <div class="btn delete" {{action "confirmDeletion"}} title='delete forever'>
+      <i class="material-icons">delete_forever</i></div>
+  </div>
+
+
+  <div class="services">
+    <h4>Services</h4>
+    {{#each model.services as |service|}}
+      {{pipeline-service service=service}}
+    {{/each}}
+  </div>
+</div>
+
+{{#if showDialog}}
+  {{confirmation-dialog buttonText='Delete' text="Delete this pipeline?" closeDialog=(action 'closeDialog') action='delete' delete=(action 'delete')}}
+{{/if}}
