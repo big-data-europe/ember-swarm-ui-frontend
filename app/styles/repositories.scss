@@ -16,6 +16,15 @@
 
     .repository--list {
       .create {
+        .input-required {
+          label {
+            color: red;
+          }
+          input {
+            border-bottom-color: red;
+          }
+        }
+
         .input-field {
           width: 90%;
         }
@@ -46,6 +55,15 @@
 
         .row {
           padding-left: 2%;
+        }
+
+        .input-required {
+          label {
+            color: red;
+          }
+          input {
+            border-bottom-color: red;
+          }
         }
 
         .input-field {

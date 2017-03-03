@@ -1,10 +1,39 @@
 import Ember from 'ember';
+import Validations from 'ember-validations';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(Validations, {
   store: Ember.inject.service('store'),
   repositoryIcon: Ember.Object.create(),
+  validations: {
+    'repositoryTitle': {
+      presence: true
+    },
+    'repositoryLocation': {
+      presence: true
+    }
+  },
+  inputRequiredTitleCssClasses: "",
+  inputRequiredLocationCssClasses: "",
+
+  isInputEmpty: function(inputFieldErrors, cssClasses) {
+    if (this.get(inputFieldErrors).length > 0) {
+      this.set(cssClasses, 'input-required');
+      return true;
+    }
+    this.set(cssClasses, '');
+    return false;
+  },
+
   actions: {
     create: function() {
+      //we need to do it like this
+      // if i would call it in the if statement, only one would be red at the end
+      var isTitleEmpty = this.isInputEmpty('errors.repositoryTitle', 'inputRequiredTitleCssClasses');
+      var isLocationEmpty = this.isInputEmpty('errors.repositoryLocation', 'inputRequiredLocationCssClasses');
+      if (isTitleEmpty || isLocationEmpty) {
+        return;
+      }
+
       var repository;
       repository = this.get('store').createRecord('repository', {
         location: this.get('repositoryLocation'),
