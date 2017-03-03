@@ -24,6 +24,21 @@ export default Ember.Component.extend(Validations, {
     return false;
   },
 
+  launchPipeline: function(repository) {
+    var target;
+    target = "/swarm/repositories/" + repository.id + "/pipelines";
+    return Ember.$.ajax(target, {
+      method: "POST"
+    }).then((function(_this) {
+      return function(response) {
+        return _this.get('store').find('pipeline-instance', Ember.get(response, 'data.id')).then(function(pipeline) {
+          pipeline.set('title', repository.get('title'));
+          return pipeline.save();
+        });
+      };
+    })(this));
+  },
+
   actions: {
     create: function() {
       //we need to do it like this
@@ -55,16 +70,9 @@ export default Ember.Component.extend(Validations, {
       return false;
     },
     launchPipeline: function(repository) {
-      var target;
-      target = "/swarm/repositories/" + repository.id + "/pipelines";
-      Ember.$.ajax(target, {
-        method: "POST"
-      }).then((function(_this) {
-        return function(response) {
-          return _this.get('store').find('pipeline-instance', Ember.get(response, 'data.id')).then(function(pipeline) {
-            pipeline.set('title', repository.get('title'));
-            return pipeline.save();
-          });
+      this.launchPipeline(repository).then((function(_this) {
+        return function(cretedPipeline) {
+          _this.sendAction('goToPipeline', cretedPipeline.get('id'));
         };
       })(this));
     }
