@@ -1,0 +1,27 @@
+{{#if model}}
+  <div class="pipeline--list">
+
+
+    {{#md-card-collapsible}}
+      {{#each model as |pipeline|}}
+        {{#md-collapsible icon=pipeline title=pipeline.title}}
+          {{#if editable}}
+            {{pipeline-manager model=pipeline}}
+          {{else}}
+            {{pipeline-list-item pipeline=pipeline}}
+          {{/if}}
+          {{!-- <div class="row">
+            <button type="button" class='btn' name="button" {{action 'manage'}}> {{manageButtonText}}</button>
+          </div> --}}
+        {{/md-collapsible}}
+
+      {{/each}}
+    {{/md-card-collapsible}}
+  </div>
+{{else}}
+  {{#md-card-panel}}
+    There are no pipelines yet. Launch one in the
+    {{#link-to 'repositories'}}repositories {{/link-to}}
+    section!
+  {{/md-card-panel}}
+{{/if}}

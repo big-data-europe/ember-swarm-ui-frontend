@@ -5,6 +5,5 @@ export default DS.Model.extend({
   location: attr('string'),
   title: attr('string'),
   icon: attr('string'),
-  mdlIcon: attr('string'),
   pipelineInstances: DS.hasMany('pipeline-instance')
 });

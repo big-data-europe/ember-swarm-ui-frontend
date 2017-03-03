@@ -1,6 +1,10 @@
-{{md-navbar name='Swarm UI' homeRoute='dashboard'}}
+{{#md-navbar name='Swarm UI' homeRoute='index' }}
+  {{#link-to 'repositories' tagName='li' }}
+    {{link-to 'Repositories' 'repositories'}}
+  {{/link-to}}
+  {{#link-to 'pipelines' tagName='li' }}
+    {{link-to 'Pipelines' 'pipelines'}}
+  {{/link-to}}
+{{/md-navbar}}
 
 {{outlet}}
-
-{{!-- ember-cli-materialize modal container --}}
-{{md-modal-container}}

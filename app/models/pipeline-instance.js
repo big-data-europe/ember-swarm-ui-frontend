@@ -6,13 +6,10 @@ import HasSerialActions from '../mixins/has-serial-actions';
 export default DS.Model.extend(HasSerialActions, {
   title: attr('string'),
   icon: attr('string'),
-  mdlIcon: attr('string'),
   status: DS.belongsTo('status', {
     async: true
   }),
-  requestedStatus: DS.belongsTo('status', {
-    async: true
-  }),
+  requestedStatus: DS.belongsTo('status'),
   repository: DS.belongsTo('repository'),
   services: DS.hasMany('service'),
   pushAction: function() {

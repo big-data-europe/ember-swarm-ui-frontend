@@ -1,18 +1,12 @@
 {{#if editing}}
-  {{md-input label="MD icon name" value=model.mdlIcon}}
-  {{md-input label="Http icon name" value=model.icon}}
-  {{#if canToggleEdit}}
-    {{md-btn text="Save" action="save"}}
-  {{/if}}
-{{else}}
-  {{#if model.mdlIcon}}
-    <i class="material-icons">{{model.mdlIcon}}</i>
-    {{else}}
-    {{#if model.icon}}
-      <img src={{model.icon}} />
-    {{/if}}
-  {{/if}}
-  {{#if canToggleEdit}}
-    {{md-btn text="Edit" action="edit"}}
+  <div class="icon-editor">
+    {{md-input label="MD icon name or web URL for a picture" value=model.icon}}
+  </div>
+{{/if}}
+{{#if model.icon}}
+  {{#if isHttpIcon}}
+    <img class="icon" src= {{model.icon}} />
+  {{else}}
+    <i class="material-icons">{{model.icon}}</i>
   {{/if}}
 {{/if}}
