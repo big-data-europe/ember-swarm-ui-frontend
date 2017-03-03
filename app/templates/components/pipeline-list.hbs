@@ -3,7 +3,12 @@
     {{#each model as |pipeline|}}
       {{#md-collapsible icon=pipeline title=pipeline.title}}
         <div class="row">
-          This is a pipeline. More info not yet available.
+          This pipeline is currently {{pipeline.status.title}}.
+          {{#if pipeline.requestedStatus}}
+            {{#if (not-eq pipeline.status.title pipeline.requestedStatus.title)}}
+              The requested status is {{pipeline.requestedStatus.title}}.
+            {{/if}}
+          {{/if}}
         </div>
         <div class="row">
           {{link-to 'Manage' 'pipelines.show' pipeline classNames="btn"}}
