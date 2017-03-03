@@ -1,12 +1,21 @@
-{{#md-card-collapsible}}
-  {{#each model as |pipeline|}}
-    {{#md-collapsible icon=pipeline title=pipeline.title}}
-      <div class="row">
-        This is a pipeline.  More info not yet available.
-      </div>
-      <div class="row">
-        {{link-to 'Manage' 'pipelines.show' pipeline classNames="btn"}}
-      </div>
-    {{/md-collapsible}}
-  {{/each}}
-{{/md-card-collapsible}}
+{{#if model}}
+  {{#md-card-collapsible}}
+    {{#each model as |pipeline|}}
+      {{#md-collapsible icon=pipeline title=pipeline.title}}
+        <div class="row">
+          This is a pipeline. More info not yet available.
+        </div>
+        <div class="row">
+          {{link-to 'Manage' 'pipelines.show' pipeline classNames="btn"}}
+        </div>
+      {{/md-collapsible}}
+
+    {{/each}}
+  {{/md-card-collapsible}}
+{{else}}
+  {{#md-card-panel}}
+    There are no pipelines yet. Launch one in the
+    {{#link-to 'repositories'}}repositories {{/link-to}}
+    section!
+  {{/md-card-panel}}
+{{/if}}
