@@ -7,12 +7,14 @@
         {{#md-collapsible icon=pipeline title=pipeline.title}}
           <div class="row">
             Current status: {{pipeline.status.title}}
-            {{#if pipeline.requestedStatus}}
-              {{#if (not-eq pipeline.status.title pipeline.requestedStatus.title)}}
-                Requested status: {{pipeline.requestedStatus.title}}.
-              {{/if}}
-            {{/if}}
           </div>
+          {{#if pipeline.requestedStatus}}
+            <div class="row">
+              {{#if (not-eq pipeline.status.title pipeline.requestedStatus.title)}}
+                Requested status: {{pipeline.requestedStatus.title}}
+              {{/if}}
+            </div>
+          {{/if}}
           <div class="row">
             Services:
             <ul class="service-list">
