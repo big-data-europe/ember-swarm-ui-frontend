@@ -5,7 +5,9 @@ import Ember from 'ember';
 export default DS.Model.extend({
   name: attr('string'),
   scaling: attr('number'),
+  restartRequested: attr('string'),
   pipeline: DS.belongsTo('pipeline-instance'),
+
   targetScaling: Ember.computed.oneWay('scaling'),
   executingScaling: false,
   changingScaling: Ember.computed('scaling', 'targetScaling', 'executingScaling', function() {
@@ -41,6 +43,10 @@ export default DS.Model.extend({
     return Ember.run.debounce(this, this.executeScaling, 1500);
   },
   restart: function() {
+    this.set('restartRequested', true);
+    this.save();
+    // TODO: do we need the rest of this function?
+
     if (!this.get('restarting')) {
       this.set('restarting', true);
       return Ember.$.ajax("/swarm/services/" + (this.get('id')) + "/restart", {
