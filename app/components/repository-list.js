@@ -4,6 +4,8 @@ import Validations from 'ember-validations';
 export default Ember.Component.extend(Validations, {
   store: Ember.inject.service('store'),
   repositoryIcon: Ember.Object.create(),
+  editing: false,
+
   validations: {
     'repositoryTitle': {
       presence: true
@@ -67,6 +69,10 @@ export default Ember.Component.extend(Validations, {
       this.set('repositoryLocation', "");
       this.set('repositoryTitle', "");
       this.set('repositoryIcon.icon', "");
+      return false;
+    },
+    edit: function() {
+      this.toggleProperty('editing');
       return false;
     },
     launchPipeline: function(repository) {

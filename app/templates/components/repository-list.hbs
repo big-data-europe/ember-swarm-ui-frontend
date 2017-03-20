@@ -2,16 +2,16 @@
   {{#md-card-collapsible}}
     {{#each model as |repository|}}
       {{#md-collapsible icon=repository title=repository.title}}
-        <div class="row">
-          Stored at <a href= {{repository.location}} target="_blank">{{repository.location}}</a>.
-        </div>
-        <div class="row">
-          Has {{repository.pipelineInstances.length}} connected pipelines.
-        </div>
-        <div class="row">
-          {{link-to 'Manage' 'repositories.show' repository classNames="btn"}}
-          <div class="btn" {{action "launchPipeline" repository}}>Launch</div>
-        </div>
+        {{#if editing}}
+          {{repository-manager model=repository edit=(action 'edit')}}
+        {{else}}
+          <div class="row">
+            Located at <a href= {{repository.location}} target="_blank">{{repository.location}}</a>. Has {{repository.pipelineInstances.length}} connected pipelines.
+          </div>
+          <div class="row actions"> {{md-btn text="edit" action="edit"}}
+            <div class="btn" {{action "launchPipeline" repository}}>Launch</div>
+          </div>
+        {{/if}}
       {{/md-collapsible}}
     {{/each}}
 

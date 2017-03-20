@@ -15,11 +15,15 @@
     }
 
     .repository--list {
+      .row {
+        padding-left: 2%;
+      }
       .create {
         .input-required {
           label {
             color: red;
           }
+
           input {
             border-bottom-color: red;
           }
@@ -46,38 +50,37 @@
         text-align: center;
       }
 
-      .container {
-        .delete {
-          display: inline-block;
-          float: right;
-          margin-right: 10%;
+      .delete {
+        display: inline-block;
+        float: right;
+        margin-right: 10%;
+      }
+
+      .row {
+        padding-left: 2%;
+      }
+
+      .input-required {
+        label {
+          color: red;
         }
 
-        .row {
-          padding-left: 2%;
+        input {
+          border-bottom-color: red;
         }
+      }
 
-        .input-required {
-          label {
-            color: red;
-          }
-          input {
-            border-bottom-color: red;
-          }
-        }
+      .input-field {
+        width: 90%;
+      }
+
+      .icon-editor {
+        display: inline-block;
+        width: 90%;
 
         .input-field {
-          width: 90%;
-        }
-
-        .icon-editor {
-          display: inline-block;
-          width: 90%;
-
-          .input-field {
-            width: 100%;
-            margin-right: 1%;
-          }
+          width: 100%;
+          margin-right: 1%;
         }
       }
     }
