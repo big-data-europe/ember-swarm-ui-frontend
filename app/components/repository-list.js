@@ -77,8 +77,8 @@ export default Ember.Component.extend(Validations, {
     },
     launchPipeline: function(repository) {
       this.launchPipeline(repository).then((function(_this) {
-        return function(cretedPipeline) {
-          _this.sendAction('goToPipeline', cretedPipeline.get('id'));
+        return function(createdPipeline) {
+          _this.sendAction('goToPipeline', createdPipeline.get('id'));
         };
       })(this));
     }
