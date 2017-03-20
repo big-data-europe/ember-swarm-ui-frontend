@@ -6,6 +6,7 @@ import HasSerialActions from '../mixins/has-serial-actions';
 export default DS.Model.extend(HasSerialActions, {
   title: attr('string'),
   icon: attr('string'),
+  restartRequested: attr('string'),
   status: DS.belongsTo('status', {
     async: true
   }),

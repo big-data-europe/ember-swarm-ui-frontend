@@ -11,7 +11,10 @@
   {{/if}}
 
   <div class="actions">
-    {{md-btn text="up" action="swarmUp"}} {{md-btn text="stop" action="swarmStop"}} {{md-btn text="down" action="swarmDown"}}
+    {{md-btn text="up" action="swarmUp"}}
+    {{md-btn text="stop" action="swarmStop"}}
+    {{md-btn text="down" action="swarmDown"}}
+    {{md-btn text="restart" action="swarmRestart"}}
     {{#if model.actionCount}}
       {{model.actionCount}} actions pending...
     {{/if}}

@@ -45,6 +45,11 @@ export default Ember.Component.extend({
       this.changeRequestedStatus("down");
       return this.pipelineOp("down");
     },
+    swarmRestart: function() {
+      this.set("model.restartRequested", true);
+      this.get('model').save();
+      return false;
+    },
     confirmDeletion: function() {
       this.set("showDialog", true);
     },
