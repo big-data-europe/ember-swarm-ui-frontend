@@ -17,33 +17,16 @@ export default Ember.Component.extend({
       };
     })(this));
   },
-  pipelineOp: function(operation, callback) {
-    return this.get('model').pushAction((function(_this) {
-      return function() {
-        return new Ember.RSVP.Promise(function(success) {
-          return Ember.$.ajax("/swarm/pipelines/" + (_this.get('model.id')) + "/" + operation, {
-            method: "POST"
-          }).then(function() {
-            success();
-            return typeof callback === "function" ? callback() : void 0;
-          });
-        });
-      };
-    })(this));
-  },
 
   actions: {
     swarmUp: function() {
       this.changeRequestedStatus("up");
-      return this.pipelineOp("up");
     },
     swarmStop: function() {
       this.changeRequestedStatus("stopped");
-      return this.pipelineOp("stop");
     },
     swarmDown: function() {
       this.changeRequestedStatus("down");
-      return this.pipelineOp("down");
     },
     swarmRestart: function() {
       this.set("model.restartRequested", true);
