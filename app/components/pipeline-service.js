@@ -5,11 +5,17 @@ export default Ember.Component.extend({
   actions: {
     decreaseServiceScaling: function() {
       var service = this.get('service');
-      return service.performScaling(service.get('targetScaling') - 1);
+      let scaling = service.get('scaling');
+      if (scaling > 0) {
+        service.set('scaling', scaling - 1);
+        service.save();
+      }
     },
     increaseServiceScaling: function() {
       var service = this.get('service');
-      return service.performScaling(service.get('targetScaling') + 1);
+      let scaling = service.get('scaling');
+      service.set('scaling', scaling + 1);
+      service.save();
     },
     restartService: function() {
       var service = this.get('service');
