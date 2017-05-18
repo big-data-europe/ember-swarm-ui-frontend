@@ -28,7 +28,7 @@
   <div class="services">
     <h4>Services</h4>
     {{#each model.services as |service|}}
-      {{pipeline-service service=service}}
+      {{pipeline-service service=service disableScaling=(not-eq model.status.title 'up')}}
     {{/each}}
   </div>
 </div>

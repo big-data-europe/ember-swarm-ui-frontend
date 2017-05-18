@@ -3,22 +3,27 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   showLogs: false,
   actions: {
-    decreaseServiceScaling: function(service) {
+    decreaseServiceScaling: function() {
+      var service = this.get('service');
       return service.performScaling(service.get('targetScaling') - 1);
     },
-    increaseServiceScaling: function(service) {
+    increaseServiceScaling: function() {
+      var service = this.get('service');
       return service.performScaling(service.get('targetScaling') + 1);
     },
-    restartService: function(service) {
+    restartService: function() {
+      var service = this.get('service');
       return service.restart();
     },
-    toggleLogs: function(service) {
+    toggleLogs: function() {
+      var service = this.get('service');
       service.toggleProperty("showLogs");
       if (service.showLogs) {
         service.refreshLogs();
       }
     },
-    refreshLogs: function(service) {
+    refreshLogs: function() {
+      var service = this.get('service');
       return service.refreshLogs();
     }
   }

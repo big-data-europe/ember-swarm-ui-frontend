@@ -4,23 +4,23 @@
       {{service.name}}
     </div>
     <div class="col s6 line-input">
-      <div class="btn secondary" {{action "decreaseServiceScaling" service}}> - </div>
+      {{md-btn class="btn secondary" action='decreaseServiceScaling' isDisabled=disableScaling text=" - "}}
       {{service.targetScaling}}
-      <div class="btn secondary" {{action "increaseServiceScaling" service}}> + </div>
+      {{md-btn class="btn secondary" action='increaseServiceScaling' isDisabled=disableScaling text=" + "}}
       {{#if service.changingScaling}}(updating){{/if}}
     </div>
     <div class="col s3 line-input">
       {{#if service.restarting}}
         Restarting...
       {{else}}
-        <div class="btn secondary" {{action "restartService" service}}>restart</div>
+        {{md-btn class="btn secondary" action='restartService' isDisabled=disableScaling text="restart"}}
       {{/if}}
-      <div class="btn secondary" {{action "toggleLogs" service}}><i class="material-icons">bug_report</i></div>
+        <div class="btn secondary" {{action "toggleLogs"}}><i class="material-icons">bug_report</i></div>
     </div>
   </div>
   {{#if service.showLogs}}
     <div class="log-container">
-      <div class="btn" {{action "refreshLogs" service}}>
+      <div class="btn" {{action "refreshLogs"}}>
         {{#if service.refreshingLogs}}...{{else}}<i class="material-icons">refresh</i>{{/if}}
       </div>
       <div class="logs">
