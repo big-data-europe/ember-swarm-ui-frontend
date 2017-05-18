@@ -45,18 +45,6 @@ export default DS.Model.extend({
   restart: function() {
     this.set('restartRequested', true);
     this.save();
-    // TODO: do we need the rest of this function?
-
-    if (!this.get('restarting')) {
-      this.set('restarting', true);
-      return Ember.$.ajax("/swarm/services/" + (this.get('id')) + "/restart", {
-        method: "POST"
-      }).then((function(_this) {
-        return function() {
-          return _this.set('restarting', false);
-        };
-      })(this));
-    }
   },
   refreshLogs: function() {
     if (!this.get('refreshingLogs')) {
