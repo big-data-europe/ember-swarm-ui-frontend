@@ -27,18 +27,12 @@ export default Ember.Component.extend(Validations, {
   },
 
   launchPipeline: function(repository) {
-    var target;
-    target = "/swarm/repositories/" + repository.id + "/pipelines";
-    return Ember.$.ajax(target, {
-      method: "POST"
-    }).then((function(_this) {
-      return function(response) {
-        return _this.get('store').find('pipeline-instance', Ember.get(response, 'data.id')).then(function(pipeline) {
-          pipeline.set('title', repository.get('title'));
-          return pipeline.save();
-        });
-      };
-    })(this));
+    var newPipeline = this.get('store').createRecord('pipeline-instance', {
+      repository: repository,
+      title: repository.get('title'),
+      icon: repository.get('icon')
+    });
+    newPipeline.save();
   },
 
   actions: {
@@ -76,11 +70,8 @@ export default Ember.Component.extend(Validations, {
       return false;
     },
     launchPipeline: function(repository) {
-      this.launchPipeline(repository).then((function(_this) {
-        return function(createdPipeline) {
-          _this.sendAction('goToPipeline', createdPipeline.get('id'));
-        };
-      })(this));
+      this.launchPipeline(repository);
+      return false;
     }
   }
 });
