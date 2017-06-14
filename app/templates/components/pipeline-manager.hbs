@@ -1,22 +1,22 @@
 <div class="pipelines--show">
   <div class="row status">
-    Current status: {{model.status.title}}
+    Current status: {{pipeline.status.title}}
   </div>
-  {{#if model.requestedStatus}}
+  {{#if pipeline.requestedStatus}}
     <div class="row status">
-      {{#if (not-eq model.status.title model.requestedStatus.title)}}
-        Requested status: {{model.requestedStatus.title}}
+      {{#if (not-eq pipeline.status.title pipeline.requestedStatus.title)}}
+        Requested status: {{pipeline.requestedStatus.title}}
       {{/if}}
     </div>
   {{/if}}
 
   <div class="actions">
-    {{md-btn text="up" action="swarmUp"}}
-    {{md-btn text="stop" action="swarmStop"}}
-    {{md-btn text="down" action="swarmDown"}}
-    {{md-btn text="restart" action="swarmRestart"}}
-    {{#if model.actionCount}}
-      {{model.actionCount}} actions pending...
+    {{md-btn text="up" action="swarmUp" isDisabled=(or (eq (await pipeline.status.title) 'up') (eq (await pipeline.status.title) 'starting'))}}
+    {{md-btn text="stop" action="swarmStop" isDisabled=(or (eq (await pipeline.status.title) 'stopped') (eq (await pipeline.status.title) 'down'))}}
+    {{md-btn text="down" action="swarmDown" isDisabled=(eq (await pipeline.status.title) 'down')}}
+    {{md-btn text="restart" action="swarmRestart" isDisabled=(and (not-eq (await pipeline.status.title) 'up') (not-eq (await pipeline.status.title) 'starting'))}}
+    {{#if pipeline.actionCount}}
+      {{pipeline.actionCount}} actions pending...
     {{/if}}
   </div>
   <div class="delete">
@@ -27,8 +27,8 @@
 
   <div class="services">
     <h4>Services</h4>
-    {{#each model.services as |service|}}
-      {{pipeline-service service=service disableScaling=(not-eq model.status.title 'up')}}
+    {{#each pipeline.services as |service|}}
+      {{pipeline-service service=service disableScaling=(not-eq pipeline.status.title 'up')}}
     {{/each}}
   </div>
 </div>

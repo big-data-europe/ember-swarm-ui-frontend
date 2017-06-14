@@ -1,6 +1,5 @@
 import DS from 'ember-data';
 import attr from 'ember-data/attr';
-import Ember from 'ember';
 
 export default DS.Model.extend({
   title: attr('string'),

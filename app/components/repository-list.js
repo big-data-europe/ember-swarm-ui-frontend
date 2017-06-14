@@ -26,13 +26,26 @@ export default Ember.Component.extend(Validations, {
     return false;
   },
 
+  getRequestedStatus: function (status) {
+    var params = {
+      filter: {
+        title: status
+      }
+    };
+    return this.get('store').query('status', params);
+  },
+
   launchPipeline: function(repository) {
-    var newPipeline = this.get('store').createRecord('pipeline-instance', {
-      repository: repository,
-      title: repository.get('title'),
-      icon: repository.get('icon')
+    this.getRequestedStatus('down').then((stat) => {
+      const status = stat.get('firstObject');
+      var newPipeline = this.get('store').createRecord('pipeline-instance', {
+        repository: repository,
+        title: repository.get('title'),
+        icon: repository.get('icon'),
+        status: status
+      });
+      newPipeline.save();
     });
-    newPipeline.save();
   },
 
   actions: {

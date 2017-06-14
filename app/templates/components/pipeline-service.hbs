@@ -3,11 +3,16 @@
     <div class="col s3">
       {{service.name}}
     </div>
-    <div class="col s6 line-input">
+    <div class="col s5 line-input">
       {{md-btn class="btn secondary" action='decreaseServiceScaling' isDisabled=disableScaling text=" - "}}
       {{service.scaling}}
       {{md-btn class="btn secondary" action='increaseServiceScaling' isDisabled=disableScaling text=" + "}}
     </div>
+
+    <div class="col s1 line-input">
+      {{md-btn class="btn secondary" action='none' isDisabled=disableStartButton text="start"}}
+    </div>
+
     <div class="col s3 line-input">
       {{#if service.restarting}}
         Restarting...
