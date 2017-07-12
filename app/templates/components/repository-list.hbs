@@ -8,7 +8,8 @@
           <div class="row">
             Located at <a href= {{repository.location}} target="_blank">{{repository.location}}</a>. Has {{repository.numberOfPipelines}} connected pipelines.
           </div>
-          <div class="row actions"> {{md-btn text="edit" action="edit"}}
+          <div class="row actions">
+            {{md-btn text="edit" action="edit"}}
             <div class="btn" {{action "launchPipeline" repository}}>Launch</div>
           </div>
         {{/if}}

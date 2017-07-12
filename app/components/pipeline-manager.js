@@ -2,47 +2,42 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   showDialog: false,
-  store: Ember.inject.service('store'),
+  statusUpdateService: Ember.inject.service('status-update'),
+  isAdvancedMode: true,
 
-  changeRequestedStatus: function(operation) {
-    var params = {
-      filter: {
-        title: operation
-      }
-    };
-    return this.get('store').query('status', params).then((function(_this) {
-      return function(statuses) {
-        _this.set('model.requestedStatus', statuses.get('firstObject'));
-        return _this.get('model').save();
-      };
-    })(this));
+  // Updates the status of the pipeline.
+  updateStatus: function(status) {
+    const pipeline = this.get('pipeline');
+    return this.get('statusUpdateService').updateStatus(pipeline, status);
   },
 
   actions: {
     swarmUp: function() {
-      this.changeRequestedStatus("up");
+      return this.updateStatus('up');
     },
     swarmStop: function() {
-      this.changeRequestedStatus("stopped");
+      return this.updateStatus('stopped');
     },
     swarmDown: function() {
-      this.changeRequestedStatus("down");
+      return this.updateStatus('down');
     },
     swarmRestart: function() {
-      this.set("model.restartRequested", true);
-      this.get('model').save();
-      return false;
+      return this.get('pipeline.status').then((stat) => {
+        if (stat.get('title') === 'up' || stat.get('title') === 'started' || stat.get('title') === 'starting') {
+          this.get('pipeline').restart();
+        }
+      });
     },
     confirmDeletion: function() {
-      this.set("showDialog", true);
+      return this.set("showDialog", true);
     },
     closeDialog: function() {
-      this.set("showDialog", false);
+      return this.set("showDialog", false);
     },
     delete: function() {
       this.set("showDialog", false);
-      this.get('model').deleteRecord();
-      this.get('model').save();
+      this.get('pipeline').deleteRecord();
+      return this.get('pipeline').save();
     }
   }
 });

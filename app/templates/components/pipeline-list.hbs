@@ -1,12 +1,10 @@
 {{#if model}}
   <div class="pipeline--list">
-
-
     {{#md-card-collapsible}}
       {{#each model as |pipeline|}}
         {{#md-collapsible icon=pipeline title=pipeline.title}}
           {{#if editable}}
-            {{pipeline-manager model=pipeline}}
+            {{pipeline-manager pipeline=pipeline}}
           {{else}}
             {{pipeline-list-item pipeline=pipeline}}
           {{/if}}
@@ -14,7 +12,6 @@
             <button type="button" class='btn' name="button" {{action 'manage'}}> {{manageButtonText}}</button>
           </div> --}}
         {{/md-collapsible}}
-
       {{/each}}
     {{/md-card-collapsible}}
   </div>

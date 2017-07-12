@@ -7,6 +7,10 @@ export default DS.Model.extend({
   scaling: attr('number'),
   restartRequested: attr('string'),
   pipelineInstance: DS.belongsTo('pipeline-instance'),
+  status: DS.belongsTo('status', {
+    async: true
+  }),
+  requestedStatus: DS.belongsTo('status'),
 
   restart: function() {
     this.set('restartRequested', true);
