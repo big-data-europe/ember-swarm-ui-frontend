@@ -3,6 +3,7 @@ import Validations from 'ember-validations';
 
 export default Ember.Component.extend(Validations, {
   store: Ember.inject.service('store'),
+  statusUpdateService: Ember.inject.service('status-update'),
   repositoryIcon: Ember.Object.create(),
   editing: false,
 
@@ -26,19 +27,10 @@ export default Ember.Component.extend(Validations, {
     return false;
   },
 
-  getRequestedStatus: function (status) {
-    var params = {
-      filter: {
-        title: status
-      }
-    };
-    return this.get('store').query('status', params);
-  },
 
   launchPipeline: function(repository) {
-    this.getRequestedStatus('down').then((stat) => {
-      const status = stat.get('firstObject');
-      var newPipeline = this.get('store').createRecord('pipeline-instance', {
+    this.get('statusUpdateService').getRequestedStatus('down').then((stat) => {
+      let newPipeline = this.get('store').createRecord('pipeline-instance', {
         repository: repository,
         title: repository.get('title'),
         icon: repository.get('icon'),
@@ -52,14 +44,13 @@ export default Ember.Component.extend(Validations, {
     create: function() {
       //we need to do it like this
       // if i would call it in the if statement, only one would be red at the end
-      var isTitleEmpty = this.isInputEmpty('errors.repositoryTitle', 'inputRequiredTitleCssClasses');
-      var isLocationEmpty = this.isInputEmpty('errors.repositoryLocation', 'inputRequiredLocationCssClasses');
+      let isTitleEmpty = this.isInputEmpty('errors.repositoryTitle', 'inputRequiredTitleCssClasses');
+      let isLocationEmpty = this.isInputEmpty('errors.repositoryLocation', 'inputRequiredLocationCssClasses');
       if (isTitleEmpty || isLocationEmpty) {
         return;
       }
 
-      var repository;
-      repository = this.get('store').createRecord('repository', {
+      let repository = this.get('store').createRecord('repository', {
         location: this.get('repositoryLocation'),
         title: this.get('repositoryTitle'),
         icon: this.get('repositoryIcon.icon'),

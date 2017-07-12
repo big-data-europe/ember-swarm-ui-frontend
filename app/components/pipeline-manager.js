@@ -3,45 +3,41 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   showDialog: false,
   statusUpdateService: Ember.inject.service('status-update'),
+  isAdvancedMode: true,
 
-  // Updates the status of the pipeline and then subsequently updates the status
-  // of each one of the services in the pipeline.
-  updateNestedStatus: function(status) {
+  // Updates the status of the pipeline.
+  updateStatus: function(status) {
     const pipeline = this.get('pipeline');
-    const statusUpdateService = this.get('statusUpdateService');
-    return statusUpdateService.updateStatus(pipeline, status).then(() => {
-      return pipeline.get('services').then((services) => services.map((service) => statusUpdateService.updateStatus(service, status)));
-    });
+    return this.get('statusUpdateService').updateStatus(pipeline, status);
   },
 
   actions: {
     swarmUp: function() {
-      this.updateNestedStatus('up');
+      return this.updateStatus('up');
     },
     swarmStop: function() {
-      this.updateNestedStatus('stopped');
+      return this.updateStatus('stopped');
     },
     swarmDown: function() {
-      this.updateNestedStatus('down');
+      return this.updateStatus('down');
     },
     swarmRestart: function() {
-      this.get('pipeline.status').then((stat) => {
-        if (stat.get('title') === 'up' || stat.get('title') === 'starting') {
-          this.set("pipeline.restartRequested", true);
-          return this.get('pipeline').save();
+      return this.get('pipeline.status').then((stat) => {
+        if (stat.get('title') === 'up' || stat.get('title') === 'started' || stat.get('title') === 'starting') {
+          this.get('pipeline').restart();
         }
       });
     },
     confirmDeletion: function() {
-      this.set("showDialog", true);
+      return this.set("showDialog", true);
     },
     closeDialog: function() {
-      this.set("showDialog", false);
+      return this.set("showDialog", false);
     },
     delete: function() {
       this.set("showDialog", false);
       this.get('pipeline').deleteRecord();
-      this.get('pipeline').save();
+      return this.get('pipeline').save();
     }
   }
 });

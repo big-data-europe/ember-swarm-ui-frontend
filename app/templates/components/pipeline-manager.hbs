@@ -10,11 +10,20 @@
     </div>
   {{/if}}
 
+  {{!-- Pipeline Action buttons --}}
   <div class="actions">
     {{md-btn text="up" action="swarmUp" isDisabled=(or (eq (await pipeline.status.title) 'up') (eq (await pipeline.status.title) 'starting'))}}
     {{md-btn text="stop" action="swarmStop" isDisabled=(or (eq (await pipeline.status.title) 'stopped') (eq (await pipeline.status.title) 'down'))}}
     {{md-btn text="down" action="swarmDown" isDisabled=(eq (await pipeline.status.title) 'down')}}
-    {{md-btn text="restart" action="swarmRestart" isDisabled=(and (not-eq (await pipeline.status.title) 'up') (not-eq (await pipeline.status.title) 'starting'))}}
+    {{md-btn text="restart" action="swarmRestart" isDisabled=(and (not-eq (await pipeline.status.title) 'up') (not-eq (await pipeline.status.title) 'starting') (not-eq (await pipeline.status.title) 'started'))}}
+
+    <label>
+      {{input type="checkbox"
+        name="checkboxPolicy"
+        checked=isAdvancedMode}}
+        Toggle Advanced Mode
+    </label>
+
     {{#if pipeline.actionCount}}
       {{pipeline.actionCount}} actions pending...
     {{/if}}
@@ -24,11 +33,11 @@
       <i class="material-icons">delete_forever</i></div>
   </div>
 
-
+  {{!-- List of containers conforming the pipeline --}}
   <div class="services">
     <h4>Services</h4>
     {{#each pipeline.services as |service|}}
-      {{pipeline-service service=service disableScaling=(not-eq pipeline.status.title 'up')}}
+      {{pipeline-service service=service advancedMode=isAdvancedMode}}
     {{/each}}
   </div>
 </div>

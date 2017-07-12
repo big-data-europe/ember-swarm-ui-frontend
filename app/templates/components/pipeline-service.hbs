@@ -1,27 +1,46 @@
 <div class="service">
   <div class="row">
-    <div class="col s3">
-      {{service.name}}
+    <div class="col s2">
+      {{service.name}} / <strong>{{service.status.title}}</strong>
     </div>
-    <div class="col s5 line-input">
-      {{md-btn class="btn secondary" action='decreaseServiceScaling' isDisabled=disableScaling text=" - "}}
+
+    {{!-- Scaling buttons --}}
+    <div class="col s3 line-input">
+      {{md-btn class="btn secondary" action='decreaseServiceScaling' isDisabled=disableScalingButton text=" - "}}
       {{service.scaling}}
-      {{md-btn class="btn secondary" action='increaseServiceScaling' isDisabled=disableScaling text=" + "}}
+      {{md-btn class="btn secondary" action='increaseServiceScaling' isDisabled=disableScalingButton text=" + "}}
     </div>
 
+    {{!-- Single container action buttons --}}
+    {{!-- Up button --}}
+    {{#if advancedMode}}
+      <div class="col s1 line-input">
+        {{md-btn class="btn secondary" action='pipelineServiceUp' isDisabled=(or (eq (await service.status.title) 'started') (eq (await service.status.title) 'starting')) text="up"}}
+      </div>
+    {{/if}}
+
+    {{!-- Start button --}}
     <div class="col s1 line-input">
-      {{md-btn class="btn secondary" action='none' isDisabled=disableStartButton text="start"}}
+      {{md-btn class="btn secondary" action='pipelineServiceStart' isDisabled=(or (eq (await service.status.title) 'started') (eq (await service.status.title) 'starting')) text="start"}}
     </div>
 
+    {{!-- Stop button --}}
+    <div class="col s1 line-input">
+      {{md-btn class="btn secondary" action='pipelineServiceStop' isDisabled=(and (not-eq (await service.status.title) 'started') (not-eq (await service.status.title) 'starting')) text="stop"}}
+    </div>
+
+    {{!-- Restart button --}}
     <div class="col s3 line-input">
       {{#if service.restarting}}
         Restarting...
       {{else}}
-        {{md-btn class="btn secondary" action='restartService' isDisabled=disableScaling text="restart"}}
+        {{md-btn class="btn secondary" action='pipelineServiceRestart' isDisabled=disableScalingButton text="restart"}}
       {{/if}}
         <div class="btn secondary" {{action "toggleLogs"}}><i class="material-icons">bug_report</i></div>
     </div>
   </div>
+
+  {{!-- Logging information about the container --}}
   {{#if service.showLogs}}
     <div class="log-container">
       <div class="btn" {{action "refreshLogs"}}>

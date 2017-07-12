@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  // starting, up, stopping, stopped, down
+  // up, starting, started, stopping, stopped, restarting, down
   title: DS.attr()
 });

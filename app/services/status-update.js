@@ -28,29 +28,57 @@ export default Ember.Service.extend({
     });
   },
 
-  // Update the status of a model if possible
+  // Update the status of a model if possible.
   updateStatus: function(model, targetStatus) {
     return new Ember.RSVP.Promise((resolve, reject) => {
       try {
         model.get('status').then((originStatus) => {
-          switch(targetStatus) {
-            case 'up':
-              if ((originStatus === null) || (originStatus.get('title') !== 'up' && originStatus.get('title') !== 'starting')) {
-                return resolve(this.changeRequestedStatus(model, targetStatus));
-              }
-              break;
-            case 'stopped':
-              if ((originStatus !== null) && (originStatus.get('title') === 'up' || originStatus.get('title') === 'starting')) {
-                return resolve(this.changeRequestedStatus(model, targetStatus));
-              }
-              break;
-            case 'down':
-              if ((originStatus) && (originStatus.get('title') === 'up' || originStatus.get('title') === 'stopped' || originStatus.get('title') === 'starting')) {
-                return resolve(this.changeRequestedStatus(model, targetStatus));
-              }
-              break;
-            default:
-              throw new Error('the target status does not exist');
+          if (model.constructor.modelName === 'pipeline-instance') {
+            switch(targetStatus) {
+              case 'up': //Target status is only up for Pipelines
+                if ((originStatus === null) || (originStatus.get('title') !== 'up' && originStatus.get('title') !== 'starting')) {
+                  return resolve(this.changeRequestedStatus(model, targetStatus));
+                }
+                break;
+              case 'stopped': //Both Pipelines and Services can be stopped.
+                if ((originStatus !== null) && (originStatus.get('title') === 'up' || originStatus.get('title') === 'starting') || originStatus.get('title') === 'started') {
+                  return resolve(this.changeRequestedStatus(model, targetStatus));
+                }
+                break;
+              case 'down':
+                if ((originStatus) && (originStatus.get('title') === 'up' || originStatus.get('title') === 'stopped' || originStatus.get('title') === 'starting') || originStatus.get('title') === 'started') {
+                  return resolve(this.changeRequestedStatus(model, targetStatus));
+                }
+                break;
+              default:
+                throw new Error('the target status for pipelines does not exist');
+            }
+          }
+          else if (model.constructor.modelName === 'service') {
+            switch(targetStatus) {
+              case 'up':
+                if ((originStatus === null) || (originStatus.get('title') !== 'up' && originStatus.get('title') !== 'starting')) {
+                  return resolve(this.changeRequestedStatus(model, targetStatus));
+                }
+                break;
+              case 'started': //Target status is only started for Services
+                if ((originStatus === null) || (originStatus.get('title') !== 'started' && originStatus.get('title') !== 'starting')) {
+                  return resolve(this.changeRequestedStatus(model, targetStatus));
+                }
+                break;
+              case 'stopped': //Both Pipelines and Services can be stopped.
+                if ((originStatus !== null) && (originStatus.get('title') === 'started' || originStatus.get('title') === 'starting')) {
+                  return resolve(this.changeRequestedStatus(model, targetStatus));
+                }
+                break;
+              default:
+                throw new Error('the target status for services does not exist');
+            }
+
+
+          }
+          else {
+            throw new Error('no functionality implemented to change status for this model');
           }
         });
       }

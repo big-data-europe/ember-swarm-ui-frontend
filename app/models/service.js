@@ -12,11 +12,6 @@ export default DS.Model.extend({
   }),
   requestedStatus: DS.belongsTo('status'),
 
-  changeStatus: function(status) {
-    this.set('status', status);
-    return this.save();
-  },
-
   restart: function() {
     this.set('restartRequested', true);
     this.save();
