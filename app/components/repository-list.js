@@ -29,7 +29,7 @@ export default Ember.Component.extend(Validations, {
 
 
   launchPipeline: function(repository) {
-    this.get('statusUpdateService').getRequestedStatus('down').then((stat) => {
+    this.get('statusUpdateService').getRequestedStatus('down').then((status) => {
       let newPipeline = this.get('store').createRecord('pipeline-instance', {
         repository: repository,
         title: repository.get('title'),

@@ -15,18 +15,18 @@
     {{!-- Up button --}}
     {{#if advancedMode}}
       <div class="col s1 line-input">
-        {{md-btn class="btn secondary" action='pipelineServiceUp' isDisabled=(or (eq (await service.status.title) 'started') (eq (await service.status.title) 'starting')) text="up"}}
+        {{md-btn class="btn secondary" action='pipelineServiceUp' isDisabled=(or (eq (await service.status.title) 'started') (eq (await service.status.title) 'starting') (eq (await service.status.title) 'up')) text="up"}}
       </div>
     {{/if}}
 
     {{!-- Start button --}}
     <div class="col s1 line-input">
-      {{md-btn class="btn secondary" action='pipelineServiceStart' isDisabled=(or (eq (await service.status.title) 'started') (eq (await service.status.title) 'starting')) text="start"}}
+      {{md-btn class="btn secondary" action='pipelineServiceStart' isDisabled=(or (eq (await service.status.title) 'started') (eq (await service.status.title) 'starting') (eq (await service.status.title) 'up')) text="start"}}
     </div>
 
     {{!-- Stop button --}}
     <div class="col s1 line-input">
-      {{md-btn class="btn secondary" action='pipelineServiceStop' isDisabled=(and (not-eq (await service.status.title) 'started') (not-eq (await service.status.title) 'starting')) text="stop"}}
+      {{md-btn class="btn secondary" action='pipelineServiceStop' isDisabled=(and (not-eq (await service.status.title) 'started') (not-eq (await service.status.title) 'starting') (not-eq (await service.status.title) 'up')) text="stop"}}
     </div>
 
     {{!-- Restart button --}}

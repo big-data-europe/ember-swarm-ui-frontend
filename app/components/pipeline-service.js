@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import DS from 'ember-data';
 
 export default Ember.Component.extend({
   statusUpdateService: Ember.inject.service('status-update'),
@@ -14,7 +13,7 @@ export default Ember.Component.extend({
         return this.set('disableScalingButton', true);
       }
       else {
-        if (serviceStatus.get('title') !== 'started') {
+        if (serviceStatus.get('title') !== 'started' && serviceStatus.get('title') !== 'up') {
           return this.set('disableScalingButton', true);
         }
       }
