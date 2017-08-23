@@ -1,7 +1,12 @@
 <div class="pipelines--show">
-  <div class="row status">
-    Current status: {{model.status.title}}
-  </div>
+  <span>
+    <div class="row status">
+      Current status: {{model.status.title}}
+      <span class='info-status' {{action 'showInfoDialog'}}>
+        <i class="tiny material-icons" style="padding-left: 10px">info_outline</i>
+      </span>
+    </div>
+  </span>
   {{#if model.requestedStatus}}
     <div class="row status">
       {{#if (not-eq model.status.title model.requestedStatus.title)}}
@@ -32,6 +37,10 @@
     {{/each}}
   </div>
 </div>
+
+{{#if showInfoDialog}}
+  {{confirmation-dialog buttonText='Got it' text=infoText closeDialog=(action 'closeInfoDialog') action='closeInfoDialog' closeInfoDialog=(action 'closeInfoDialog') infoModal=true}}
+{{/if}}
 
 {{#if showDialog}}
   {{confirmation-dialog buttonText='Delete' text="Delete this pipeline?" closeDialog=(action 'closeDialog') action='delete' delete=(action 'delete')}}

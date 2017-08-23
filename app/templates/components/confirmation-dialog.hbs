@@ -1,6 +1,6 @@
-{{#md-modal close='closeDialog' class="" }}
+{{#md-modal close='closeDialog' modalClassNames=modalClassNames}}
   <div class="modal-content">
-    {{text}}
+    {{{text}}}
   </div>
   <div class="modal-footer">
     <a class="btn secondary" {{action 'closeDialog'}}> Cancel</a>
