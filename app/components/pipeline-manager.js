@@ -34,8 +34,8 @@ export default Ember.Component.extend({
   `,
   showDialog: false,
   statusUpdateService: Ember.inject.service('status-update'),
-  isAdvancedMode: true,
-
+  isAdvancedMode: false,
+  
   // Updates the status of the pipeline.
   updateStatus: function(status) {
     const pipeline = this.get('pipeline');
@@ -51,6 +51,9 @@ export default Ember.Component.extend({
     },
     swarmUp: function() {
       return this.updateStatus('up');
+    },
+    swarmStart: function() {
+      return this.updateStatus('started');
     },
     swarmStop: function() {
       return this.updateStatus('stopped');
