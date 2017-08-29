@@ -1,16 +1,16 @@
 <div class="pipelines--show">
   <span>
     <div class="row status">
-      Current status: {{model.status.title}}
+      Current status: <strong>{{pipeline.status.title}}</strong>
       <span class='info-status' {{action 'showInfoDialog'}}>
         <i class="tiny material-icons" style="padding-left: 10px">info_outline</i>
       </span>
     </div>
   </span>
-  {{#if model.requestedStatus}}
+  {{#if pipeline.requestedStatus}}
     <div class="row status">
       {{#if (not-eq pipeline.status.title pipeline.requestedStatus.title)}}
-        Requested status: {{pipeline.requestedStatus.title}}
+        Requested status: <strong>{{pipeline.requestedStatus.title}}</strong>
       {{/if}}
     </div>
   {{/if}}
@@ -18,10 +18,16 @@
   {{!-- Pipeline Action buttons --}}
   <div class="actions">
     {{md-btn text="up" action="swarmUp" isDisabled=(or (eq (await pipeline.status.title) 'up') (eq (await pipeline.status.title) 'starting'))}}
+
+    {{#if isAdvancedMode}}
+      {{md-btn text="start" action="swarmStart" isDisabled=(or (eq (await pipeline.status.title) 'up') (eq (await pipeline.status.title) 'starting'))}}
+    {{/if}}
+
     {{md-btn text="stop" action="swarmStop" isDisabled=(or (eq (await pipeline.status.title) 'stopped') (eq (await pipeline.status.title) 'down'))}}
     {{md-btn text="down" action="swarmDown" isDisabled=(eq (await pipeline.status.title) 'down')}}
     {{md-btn text="restart" action="swarmRestart" isDisabled=(and (not-eq (await pipeline.status.title) 'up') (not-eq (await pipeline.status.title) 'starting') (not-eq (await pipeline.status.title) 'started'))}}
 
+    {{!-- Toggle advanced mode button  --}}
     <label>
       {{input type="checkbox"
         name="checkboxPolicy"

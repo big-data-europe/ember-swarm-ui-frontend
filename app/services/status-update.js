@@ -36,17 +36,22 @@ export default Ember.Service.extend({
           if (model.constructor.modelName === 'pipeline-instance') {
             switch(targetStatus) {
               case 'up': //Target status is only up for Pipelines
-                if ((originStatus === null) || (originStatus.get('title') !== 'up' && originStatus.get('title') !== 'starting')) {
+                if ((originStatus === null) || (originStatus.get('title') === 'error') || (originStatus.get('title') !== 'up' && originStatus.get('title') !== 'starting')) {
                   return resolve(this.changeRequestedStatus(model, targetStatus));
                 }
                 break;
+              case 'started':
+                if ((originStatus === null) || (originStatus.get('title') === 'error') || (originStatus.get('title') !== 'up' && originStatus.get('title') !== 'starting')) {
+                  return resolve(this.changeRequestedStatus(model, targetStatus));
+                }
+                break;       
               case 'stopped': //Both Pipelines and Services can be stopped.
-                if ((originStatus !== null) && (originStatus.get('title') === 'up' || originStatus.get('title') === 'starting') || originStatus.get('title') === 'started') {
+                if ((originStatus !== null) && (originStatus.get('title') === 'error' || originStatus.get('title') === 'up' || originStatus.get('title') === 'starting') || originStatus.get('title') === 'started') {
                   return resolve(this.changeRequestedStatus(model, targetStatus));
                 }
                 break;
               case 'down':
-                if ((originStatus) && (originStatus.get('title') === 'up' || originStatus.get('title') === 'stopped' || originStatus.get('title') === 'starting') || originStatus.get('title') === 'started') {
+                if ((originStatus) && (originStatus.get('title') === 'error' || originStatus.get('title') === 'up' || originStatus.get('title') === 'stopped' || originStatus.get('title') === 'starting') || originStatus.get('title') === 'started') {
                   return resolve(this.changeRequestedStatus(model, targetStatus));
                 }
                 break;
