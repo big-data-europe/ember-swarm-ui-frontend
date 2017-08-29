@@ -68,6 +68,9 @@ export default Ember.Component.extend({
         }
       });
     },
+    updatePipeline: function() {
+      return this.get('pipeline').update();
+    },
     confirmDeletion: function() {
       return this.set("showDialog", true);
     },
