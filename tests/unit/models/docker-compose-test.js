@@ -1,6 +1,6 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('repository', 'Unit | Model | repository', {
+moduleForModel('docker-compose', 'Unit | Model | docker compose', {
   // Specify the other units that are required for this test.
   needs: []
 });

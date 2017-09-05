@@ -7,8 +7,6 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('pipelines', function() {});
-  this.route('repositories', function() {});
 });
 
 export default Router;
