@@ -5,7 +5,7 @@ export default Ember.Component.extend(Validations, {
   store: Ember.inject.service('store'),
   stackIcon: Ember.Object.create(),
   stackTitle: null,
-  stackDockerFile: null,
+  stackDockerFile: Ember.Object.create(),
 
   validations: {
     'stackTitle': {
