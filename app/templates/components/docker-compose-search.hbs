@@ -1,20 +1,10 @@
-<div class="row">
-      <div class="search">
-  <i class="material-icons">search</i>
-  <input type="text" oninput= {{perform dockerComposeList value="target.value"}} placeholder="Search" />
-</div>
-</div>
-{{#if dockerComposeList.isRunning}}
-  {{md-loader mode="circular" size=small}}
-{{else}}
-  {{#if dockerComposeList.lastSuccessful.value}}
-    <label>Search for a docker file.</label>
-    <div class="docker-compose-search-results">
-        {{#each dockerComposeList.lastSuccessful.value as |element|}}
-          {{element.title}}
-        {{/each}}
-    </div>
-  {{else}}
-    No docker compose files to show.
-  {{/if}}
-{{/if}}
+{{#power-select
+  allowClear=false
+  options=dockerComposeList.lastSuccessful.value
+  search=(perform dockerComposeList)
+  selected=stackDockerFile
+  onchange=(action (mut stackDockerFile))
+  as |option|
+}}
+  {{option.title}}
+{{/power-select}}
