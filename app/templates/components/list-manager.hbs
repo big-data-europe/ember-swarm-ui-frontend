@@ -1,0 +1,25 @@
+<div class="repository--list">
+  {{#md-card-collapsible}}
+    {{#each model as |item|}}
+      {{#if item.isRepository}}
+        {{list-item-repository item=item launchPipeline=(action launchPipeline)}}
+      {{else if item.isStack}}
+        todo stack
+      {{/if}}
+    {{/each}}
+
+    {{#md-collapsible icon="add" title="Create new repository" }}
+      <div class="create">
+        {{!-- {{input type="check" value=isRepository }} --}}
+
+        {{#if isRepository}}
+          {{repository-creator}}
+        {{else if item.isStack}}
+            todo stack creator
+        {{/if}}
+
+      </div>
+    {{/md-collapsible}}
+  {{/md-card-collapsible}}
+
+</div>

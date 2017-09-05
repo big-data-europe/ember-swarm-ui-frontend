@@ -1,0 +1,13 @@
+{{#md-collapsible icon=item title=item.title}}
+  {{#if editing}}
+    {{repository-manager model=item edit=(action 'edit')}}
+  {{else}}
+    <div class="row">
+      Located at <a href= {{item.location}} target="_blank">{{item.location}}</a>. Has {{item.numberOfPipelines}} connected pipelines.
+    </div>
+    <div class="row actions">
+      {{md-btn text="edit" action="edit"}}
+      <div class="btn" {{action "launchPipeline" item}}>Launch</div>
+    </div>
+  {{/if}}
+{{/md-collapsible}}

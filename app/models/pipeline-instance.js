@@ -8,13 +8,18 @@ export default DS.Model.extend({
   updateRequested: attr('string'),
   status: DS.belongsTo('status'),
   requestedStatus: DS.belongsTo('status'),
-  repository: DS.belongsTo('repository'),
+  repository: DS.belongsTo('repository', {
+    inverse: 'pipelineInstances'
+  }),
+  stack: DS.belongsTo('stack', {
+    inverse: 'pipelineInstances'
+  }),
   services: DS.hasMany('service'),
 
   // Right now both for restarting & updating pipelines, a triple is written into the database
   // and once the pipeline is restarted or updated, the triple is removed from the DB, but that
-  // is not reflected in the frontend since we don't have a way of pushing notifications yet. 
-  // The problem with this is that once you have restarted once, updating the pipeline will also 
+  // is not reflected in the frontend since we don't have a way of pushing notifications yet.
+  // The problem with this is that once you have restarted once, updating the pipeline will also
   // trigger a restart since the flag was never cleared in the frontend.
   // The best we can do now is optimistically assume that the admin service has successfully performed
   // the operation, cross fingers and reset the restart/update flag once we know the call at least
