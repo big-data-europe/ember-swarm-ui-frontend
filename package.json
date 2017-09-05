@@ -63,6 +63,7 @@
     "ember-cli-htmlbars": "^1.1.1",
     "ember-cli-materialize": "^0.22.0-beta.0",
     "ember-composability": "0.3.7",
+    "ember-keyboard": "1.0.3",
     "ember-modal-dialog": "0.8.8",
     "ember-new-computed": "1.0.3",
     "ember-promise-helpers": "1.0.3",
