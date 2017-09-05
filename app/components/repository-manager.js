@@ -60,7 +60,7 @@ export default Ember.Component.extend(Validations, {
       this.get('model').deleteRecord();
       this.get('model').save();
       // TODO: popup to approve??
-      this.transitionToRoute('repositories');
+      this.transitionToRoute('list');
     }
   }
 });
