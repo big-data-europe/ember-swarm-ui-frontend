@@ -1,14 +1,7 @@
 import DS from 'ember-data';
-import Ember from 'ember';
 import attr from 'ember-data/attr';
+import Concept from '../mixins/swarm-ui-concept';
 
-export default DS.Model.extend({
-  location: attr('string'),
-  title: attr('string'),
-  icon: attr('string'),
-  pipelineInstances: DS.hasMany('pipeline-instance'),
-
-  numberOfPipelines: Ember.computed('pipelineInstances','pipelineInstances.[]', function(){
-    return this.get('pipelineInstances.length');
-  })
+export default DS.Model.extend(Concept, {
+  location: attr('string')
 });
