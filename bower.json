@@ -1,5 +1,5 @@
 {
-  "name": "swarm-ui-frontend",
+  "name": "ember-swarm-ui-frontend",
   "dependencies": {
     "materialize": "0.97.6"
   },

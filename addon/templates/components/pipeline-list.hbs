@@ -1,4 +1,5 @@
-{{#if model}}
+pip-list-int
+{{#if model}}if
   <div class="pipeline--list">
     {{#md-card-collapsible}}
       {{#each model as |pipeline|}}
@@ -15,10 +16,11 @@
       {{/each}}
     {{/md-card-collapsible}}
   </div>
-{{else}}
+{{else}}else
   {{#md-card-panel}}
     There are no pipelines yet. Launch one in the
     {{#link-to 'repositories'}}repositories {{/link-to}}
     section!
   {{/md-card-panel}}
 {{/if}}
+/pip-list-int

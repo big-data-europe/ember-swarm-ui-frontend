@@ -2,7 +2,7 @@
 const EngineAddon = require('ember-engines/lib/engine-addon');
 
 module.exports = EngineAddon.extend({
-  name: 'ember-swarm-ui-engine',
+  name: 'ember-swarm-ui-frontend',
   isDevelopingAddon: function() {
     return true;
   },

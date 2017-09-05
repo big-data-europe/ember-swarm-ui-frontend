@@ -3,7 +3,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'swarm-ui-frontend',
+    modulePrefix: 'ember-swarm-ui-frontend',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
