@@ -1,4 +1,4 @@
-<div class="repository--list">
+<div class="item--list">
   {{#md-card-collapsible}}
     {{#each model as |item|}}
       {{#if item.isRepository}}
@@ -9,15 +9,19 @@
     {{/each}}
 
     {{#md-collapsible icon="add" title="Create new repository" }}
+      <div class="create-selector">
+        {{#md-radios
+            selection=isRepository}}
+            {{md-radio value=true name="Repository"}}
+            {{md-radio value=false name="Stack"}}
+        {{/md-radios}}
+      </div>
       <div class="create">
-        {{!-- {{input type="check" value=isRepository }} --}}
-
         {{#if isRepository}}
           {{repository-creator}}
         {{else if item.isStack}}
             todo stack creator
         {{/if}}
-
       </div>
     {{/md-collapsible}}
   {{/md-card-collapsible}}

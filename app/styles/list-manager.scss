@@ -1,4 +1,4 @@
-.repositories {
+.list {
   .container {
     h1 {
       text-align: center;
@@ -14,9 +14,20 @@
       }
     }
 
-    .repository--list {
+    .item--list {
       .row {
         padding-left: 2%;
+      }
+
+      .create-selector {
+        .md-radios {
+          .materialize-selectable-item {
+            display: inline-block;
+            &:not(:first-child) {
+              margin-left: 5%;
+            }
+          }
+        }
       }
       .create {
         .input-required {
