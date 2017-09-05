@@ -1,0 +1,10 @@
+<div class= {{inputRequiredTitleCssClasses}}>
+  {{md-input label="Name of stack" value=stackTitle}}
+</div>
+<div class= {{inputRequiredDockerFileCssClasses}}>
+  {{md-input label="Git web URL for a stack with a docker-compose.yml file" value=stackDockerFile}}
+</div>
+
+{{smart-icon editing=true model=stackIcon}}
+{{md-btn text="Create" action="create"}}
+{{md-btn text="Clear" action="clear"}}

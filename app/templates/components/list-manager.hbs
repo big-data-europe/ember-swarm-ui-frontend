@@ -19,8 +19,8 @@
       <div class="create">
         {{#if isRepository}}
           {{repository-creator}}
-        {{else if item.isStack}}
-            todo stack creator
+        {{else}}
+          {{stack-creator}}
         {{/if}}
       </div>
     {{/md-collapsible}}
