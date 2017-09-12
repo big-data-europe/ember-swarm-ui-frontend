@@ -27,7 +27,7 @@ export default Ember.Component.extend({
     var params = {
       sort: 'title'
     };
-    if (searchValue.length > 0) {
+    if (searchValue !== null) {
       params.filter = {
         title: searchValue
       };
