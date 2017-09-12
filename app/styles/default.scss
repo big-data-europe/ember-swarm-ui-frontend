@@ -5,9 +5,14 @@ nav {
   background-position: 50px 0;
 
   ul {
+    width: 25%;
     li {
       cursor: pointer;
-        padding: 0 2%;
+      padding: 0 2%;
+
+      &:hover {
+        background-color: #546e7a;
+      }
     }
   }
 }
