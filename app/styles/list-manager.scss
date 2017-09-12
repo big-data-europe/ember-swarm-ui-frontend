@@ -58,22 +58,21 @@
             margin-right: 1%;
           }
         }
+      }
+      .docker-search {
+        label {
+          font-size: 1rem;
+          padding-left: 1%;
+        }
 
-        .docker-search {
-          label {
-            font-size: 1rem;
-            padding-left: 1%;
-          }
+        .docker-compose-search {
+          width: 90%;
+          padding: 1.1% 0;
 
-          .docker-compose-search {
-            width: 90%;
-            padding: 1.1% 0;
-
-            .ember-basic-dropdown-content {
-              .ember-power-select-search {
-                input {
-                  padding: 0 10%;
-                }
+          .ember-basic-dropdown-content {
+            .ember-power-select-search {
+              input {
+                padding: 0 10%;
               }
             }
           }

@@ -1,0 +1,21 @@
+<div class="repositories--show">
+  <div class= {{inputRequiredTitleCssClasses}}>
+    {{md-input label="Name of stack" value=model.title}}
+  </div>
+  {{smart-icon model=model editing=true}}
+  <div class='docker-search'>
+    <div class= {{inputRequiredDockerFileCssClasses}}>
+      <label>Docker Compose File</label> {{docker-compose-search stackDockerFile=newDockerFile}}
+    </div>
+  </div>
+  {{md-btn text="Update" action="save"}}
+  {{md-btn text="Cancel" action="cancel"}}
+  <div class="delete">
+    <div class="btn delete" {{action "confirmDeletion"}} title='delete forever'><i class="material-icons">delete_forever</i></div>
+  </div>
+
+</div>
+
+{{#if showDialog}}
+  {{confirmation-dialog buttonText='Delete' text="Delete this stack?" closeDialog=(action 'closeDialog') action='delete' delete=(action 'delete')}}
+{{/if}}
