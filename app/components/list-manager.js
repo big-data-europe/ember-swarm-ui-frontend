@@ -18,11 +18,10 @@ export default Ember.Component.extend({
 
     if (item.isRepository) {
       pipeline.repository = item;
-    }
-    else if (item.isStack) {
+    } else if (item.isStack) {
       pipeline.stack = item;
     }
-    
+
     this.get('statusUpdateService').getRequestedStatus('down').then((status) => {
       pipeline.status = status;
       let newPipeline = this.get('store').createRecord('pipeline-instance', pipeline);
@@ -32,10 +31,7 @@ export default Ember.Component.extend({
 
   actions: {
     launchPipeline: function(item) {
-      if(item.isRepository) {
-        this.launchPipeline(item);
-        return false;
-      }
+      this.launchPipeline(item);
       return false;
     }
 

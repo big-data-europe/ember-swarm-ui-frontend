@@ -1,10 +1,15 @@
 <div class="item--list">
   {{#md-card-collapsible}}
-    {{#each model as |item|}}
+
+    {{#each model.repositories as |item|}}
       {{#if item.isRepository}}
         {{list-item-repository item=item launchPipeline=(action launchPipeline)}}
-      {{else if item.isStack}}
-        todo stack
+      {{/if}}
+    {{/each}}
+
+    {{#each model.stacks as |item|}}
+      {{#if item.isStack}}
+        {{list-item-stack item=item launchPipeline=(action launchPipeline)}}
       {{/if}}
     {{/each}}
 
