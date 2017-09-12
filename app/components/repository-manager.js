@@ -59,8 +59,6 @@ export default Ember.Component.extend(Validations, {
       this.set("showDialog", false);
       this.get('model').deleteRecord();
       this.get('model').save();
-      // TODO: popup to approve??
-      this.transitionToRoute('list');
     }
   }
 });

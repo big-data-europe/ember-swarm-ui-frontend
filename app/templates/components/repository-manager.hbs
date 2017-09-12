@@ -2,10 +2,10 @@
   <div class= {{inputRequiredTitleCssClasses}}>
     {{md-input label="Name of repository" value=model.title}}
   </div>
+  {{smart-icon model=model editing=true}}
   <div class= {{inputRequiredLocationCssClasses}}>
     {{md-input label="Git web URL for a repository with a docker-compose.yml file" value=model.location}}
   </div>
-  {{smart-icon model=model editing=true}}
   {{md-btn text="Update" action="save"}}
   {{md-btn text="Cancel" action="cancel"}}
   <div class="delete">
