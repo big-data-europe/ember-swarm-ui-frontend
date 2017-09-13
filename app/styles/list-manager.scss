@@ -24,16 +24,20 @@
           font-size: 1rem;
           padding: 0 0 1% 1%;
         }
+
         .md-radios {
           padding-top: 1%;
+
           .materialize-selectable-item {
             display: inline-block;
+
             &:not(:first-child) {
               margin-left: 5%;
             }
           }
         }
       }
+
       .create {
         .input-required {
           label {
@@ -59,6 +63,7 @@
           }
         }
       }
+
       .docker-search {
         label {
           font-size: 1rem;
@@ -74,6 +79,14 @@
               input {
                 padding: 0 10%;
               }
+            }
+          }
+        }
+
+        .input-required {
+          .docker-compose-search {
+            .ember-power-select-trigger {
+              border-color: red;
             }
           }
         }

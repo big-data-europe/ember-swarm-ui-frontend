@@ -5,7 +5,7 @@ export default Ember.Component.extend(Validations, {
   store: Ember.inject.service('store'),
   stackIcon: Ember.Object.create(),
   stackTitle: null,
-  stackDockerFile: Ember.Object.create(),
+  stackDockerFile: null,
 
   validations: {
     'stackTitle': {
@@ -52,6 +52,8 @@ export default Ember.Component.extend(Validations, {
     clear: function() {
       this.set('stackDockerFile', null);
       this.set('stackTitle', "");
+      this.set('inputRequiredTitleCssClasses', "");
+      this.set('inputRequiredDockerFileCssClasses', "");
       this.set('stackIcon.icon', '');
       return false;
     },

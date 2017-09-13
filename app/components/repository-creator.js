@@ -51,6 +51,8 @@ export default Ember.Component.extend(Validations, {
     clear: function() {
       this.set('repositoryLocation', "");
       this.set('repositoryTitle', "");
+      this.set('inputRequiredTitleCssClasses', "");
+      this.set('inputRequiredLocationCssClasses', "");
       this.set('repositoryIcon.icon', "");
       return false;
     },
